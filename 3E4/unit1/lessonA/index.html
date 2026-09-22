@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3E4 – Unit 1 – Lesson A</title>
+<style>
+body{font-family:system-ui,Arial,sans-serif;max-width:900px;margin:auto;padding:24px;line-height:1.5;background:#f6f7fb;color:#18202a}h1,h2{color:#163a63}.card{background:white;border-radius:14px;padding:20px;margin:18px 0;box-shadow:0 2px 10px #0001}.q{padding:12px 0;border-bottom:1px solid #eee}.q:last-child{border:0}input,select{font:inherit;padding:7px;border:1px solid #aaa;border-radius:7px;min-width:150px}button{font:inherit;padding:9px 14px;border:0;border-radius:8px;background:#163a63;color:white;margin:12px 8px 0 0;cursor:pointer}.feedback{font-weight:700;margin-left:8px}.ok{color:#17823b}.bad{color:#b42318}.small{color:#555}.wordbank{font-weight:700;background:#eef4fb;padding:10px;border-radius:8px}.stage{background:#f8fafc;padding:10px;margin:8px 0;border-radius:8px}.score{font-weight:700;margin-top:12px}
+</style>
+</head><body>
+<h1>3E4 — Unit 1 — Lesson A</h1>
+<p>Road trip — BE, BE GOING TO, plans and purpose, chronology.</p>
+<div id="app"></div>
+<script>
+const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+const norm=s=>s.trim().toLowerCase().replace(/[’']/g,"'").replace(/\s+/g,' ').replace(/[.!?]+$/,'');
+function inputExercise(title,instructions,pool,n=10){
+ const chosen=shuffle(pool).slice(0,Math.min(n,pool.length));
+ const box=document.createElement('section'); box.className='card';
+ box.innerHTML=`<h2>${title}</h2><p>${instructions}</p>`;
+ chosen.forEach((x,i)=>{let d=document.createElement('div');d.className='q';d.innerHTML=`<b>${i+1}.</b> ${x.q.replace('___','<input>')} <span class="feedback"></span>`;box.appendChild(d)});
+ let score=document.createElement('div');score.className='score';
+ let b=document.createElement('button');b.textContent='Check answers';b.onclick=()=>{let total=0;[...box.querySelectorAll('.q')].forEach((d,i)=>{let inp=d.querySelector('input'),f=d.querySelector('.feedback');let ok=chosen[i].a.some(a=>norm(inp.value)===norm(a));f.textContent=ok?'✓':'✗ '+chosen[i].a[0];f.className='feedback '+(ok?'ok':'bad');if(ok)total++});score.textContent=`Score: ${total}/${chosen.length}`};
+ let r=document.createElement('button');r.textContent='Try again';r.onclick=()=>location.reload();box.append(b,r,score);return box;
+}
+const be=[
+['I ___ ready for the road trip.',['am']],['My best friend ___ excited about the trip.',['is']],['We ___ in New York yet. We are still in Los Angeles.',["aren't","are not"]],['Sarah and Tom ___ tired. They want to continue the journey.',["aren't","are not"]],['The Grand Canyon ___ in California.',["isn't","is not"]],['You ___ ready to leave.',['are']],['My parents ___ with us. I am travelling with my friends.',["aren't","are not"]],['Our next stop ___ Miami Beach.',['is']],
+['I ___ not tired this morning.',['am']],['The hotels ___ very expensive here.',['are']],['Our car ___ in the hotel car park.',['is']],['We ___ not far from the airport.',["are","aren't"]],['My brother ___ not interested in museums.',["isn't","is not"]],['The beaches ___ beautiful in Miami.',['are']],['You ___ not late.',["aren't","are not"]],['Los Angeles ___ on the West Coast.',['is']],['My friends ___ at the airport.',['are']],['The weather ___ not very good today.',["isn't","is not"]],['I ___ happy to be here.',['am']],['Our bags ___ in the car.',['are']],['The museum ___ closed today.',['is']],['We ___ not at the Grand Canyon today.',["aren't","are not"]],['Tom ___ our driver today.',['is']],['Sarah and I ___ ready to go.',['are']],['The Statue of Liberty ___ in New York.',['is']],['My parents ___ at home in France.',['are']],['I ___ not afraid of flying.',['am']],['The streets ___ very busy.',['are']],['Our next destination ___ not Las Vegas.',["isn't","is not"]],['You and Tom ___ in the same group.',['are']]
+].map(([q,a])=>({q,a}));
+const going=[
+['We ___ New York. (visit)',['are going to visit']],['I ___ pictures of the Golden Gate Bridge. (take)',['am going to take']],['My sister ___ in Miami Beach. (swim)',['is going to swim']],['Tom and his friends ___ across the USA by car. (travel)',['are going to travel']],['Sarah ___ Las Vegas because she doesn’t like big cities. (not / visit)',["isn't going to visit","is not going to visit"]],['My parents ___ with us. (not / come)',["aren't going to come","are not going to come"]],['You ___ the Grand Canyon. (see)',['are going to see']],['Our group ___ in Los Angeles for three days. (stay)',['is going to stay']],
+['I ___ a postcard in San Francisco. (buy)',['am going to buy']],['We ___ a hotel near the beach. (book)',['are going to book']],['Tom ___ the car today. (drive)',['is going to drive']],['They ___ at the airport. (meet)',['are going to meet']],['Sarah ___ a museum this afternoon. (visit)',['is going to visit']],['You ___ lots of photos. (take)',['are going to take']],['My friends ___ by plane. (travel)',['are going to travel']],['I ___ in the ocean today. (not / swim)',["am not going to swim"]],['We ___ in Las Vegas tonight. (not / stay)',["aren't going to stay","are not going to stay"]],['He ___ the White House. (see)',['is going to see']],['The group ___ early tomorrow. (leave)',['is going to leave']],['My sister and I ___ souvenirs. (buy)',['are going to buy']],['You ___ the bus. (not / take)',["aren't going to take","are not going to take"]],['Tom ___ at the hotel. (not / eat)',["isn't going to eat","is not going to eat"]],['I ___ New York next week. (explore)',['am going to explore']],['We ___ Route 66. (drive along)',['are going to drive along']],['Sarah ___ her friends in Miami. (meet)',['is going to meet']],['My parents ___ us in California. (join)',['are going to join']],['The tourists ___ at 7 a.m. (start)',['are going to start']],['Our teacher ___ with us. (come)',['is going to come']],['I ___ the Statue of Liberty. (see)',['am going to see']],['They ___ home before Friday. (not / go)',["aren't going to go","are not going to go"]]
+].map(([q,a])=>({q,a}));
+const trans=[
+['Nous allons visiter New York.',['We are going to visit New York']],['Je ne vais pas visiter Las Vegas.',["I am not going to visit Las Vegas","I'm not going to visit Las Vegas"]],['Nous allons à New York pour voir la Statue de la Liberté.',['We are going to New York to see the Statue of Liberty']],['Mes amis vont prendre la voiture pour aller à Los Angeles.',['My friends are going to take the car to go to Los Angeles']],['À Los Angeles, nous allons voir les Lakers jouer au basket.',['In Los Angeles, we are going to see the Lakers play basketball','In Los Angeles, we are going to watch the Lakers play basketball']],['Ma sœur ne va pas se baigner à Miami Beach.',["My sister isn't going to swim in Miami Beach","My sister is not going to swim in Miami Beach"]],['Nous allons à Washington DC pour visiter la Maison-Blanche.',['We are going to Washington DC to visit the White House']],['Tom et Sarah ne vont pas prendre l’avion. Ils vont voyager en voiture.',["Tom and Sarah aren't going to take the plane. They are going to travel by car","Tom and Sarah are not going to take the plane. They are going to travel by car"]],
+['Je vais prendre des photos du Golden Gate Bridge.',['I am going to take pictures of the Golden Gate Bridge','I am going to take photos of the Golden Gate Bridge']],['Nous allons à Miami pour nous baigner.',['We are going to Miami to swim']],['Ils vont visiter le Grand Canyon.',['They are going to visit the Grand Canyon']],['Elle ne va pas voyager en bus.',["She isn't going to travel by bus","She is not going to travel by bus"]],['Nous allons prendre la voiture pour aller à Washington DC.',['We are going to take the car to go to Washington DC']],['Je vais à San Francisco pour voir le Golden Gate Bridge.',['I am going to San Francisco to see the Golden Gate Bridge']],['Mes parents vont rester à Los Angeles.',['My parents are going to stay in Los Angeles']],['Tu ne vas pas prendre l’avion.',["You aren't going to take the plane","You are not going to take the plane"]],['Nous allons à New York pour visiter Central Park.',['We are going to New York to visit Central Park']],['Tom va conduire jusqu’à Miami.',['Tom is going to drive to Miami']],['Sarah va acheter des souvenirs.',['Sarah is going to buy souvenirs']],['Ils ne vont pas rester à Las Vegas.',["They aren't going to stay in Las Vegas","They are not going to stay in Las Vegas"]],['Je vais à la plage pour me détendre.',['I am going to the beach to relax']],['Nous allons voir la Maison-Blanche.',['We are going to see the White House']],['Mes amis vont voyager à travers les États-Unis.',['My friends are going to travel across the USA','My friends are going to travel across the United States']],['Elle va à Miami pour nager.',['She is going to Miami to swim']],['Je ne vais pas acheter de souvenirs.',["I am not going to buy souvenirs","I'm not going to buy souvenirs"]],['Nous allons rester trois jours à Los Angeles.',['We are going to stay in Los Angeles for three days']],['Ils vont prendre des photos à New York.',['They are going to take pictures in New York','They are going to take photos in New York']],['Tu vas voir le Grand Canyon.',['You are going to see the Grand Canyon']],['Nous n’allons pas voyager en avion.',["We aren't going to travel by plane","We are not going to travel by plane"]],['Je vais à Washington DC pour visiter la Maison-Blanche.',['I am going to Washington DC to visit the White House']]
+].map(([q,a])=>({q,a}));
+const trips=[
+[
+'We are going to arrive in New York City at 10 a.m. and pick up our car at the airport.',
+'Our next destination is Washington DC. We are going to drive there from New York.',
+'We are going to spend two days in Washington DC to visit the White House.',
+'Before going back home, we are going to relax and swim in Miami Beach.',
+'We are going to take the plane back home from Miami at 8 p.m.'
+],[
+'We are going to land in Los Angeles and pick up our rental car.',
+'We are going to spend the day visiting Hollywood and Beverly Hills.',
+'We are going to drive to Las Vegas and stay there for one night.',
+'We are going to continue to the Grand Canyon and take lots of pictures.',
+'We are finally going to drive to San Francisco and finish our trip there.'
+],[
+'We are going to arrive in San Francisco in the morning.',
+'We are going to visit the Golden Gate Bridge and explore the city.',
+'We are going to drive south along the California coast.',
+'We are going to spend two days in Los Angeles and visit Hollywood.',
+'We are going to take our flight home from Los Angeles.'
+],[
+'We are going to arrive in Miami and collect our luggage.',
+'We are going to spend the afternoon relaxing on Miami Beach.',
+'We are going to drive north to Orlando the next morning.',
+'We are going to spend a day visiting the city before continuing north.',
+'We are going to finish the trip by flying home from our final stop.'
+],[
+'We are going to start our road trip in New York City.',
+'We are going to drive to Philadelphia after visiting New York.',
+'We are going to continue south to Washington DC.',
+'We are going to visit the White House before leaving the capital.',
+'We are finally going to take the plane home after our East Coast trip.'
+],[
+'We are going to start in Los Angeles and rent a car at the airport.',
+'We are going to drive east to Las Vegas after two days in Los Angeles.',
+'We are going to leave Las Vegas early and travel to the Grand Canyon.',
+'We are going to spend the afternoon exploring the Grand Canyon.',
+'We are finally going to return to Las Vegas for our flight home.'
+]
+];
+function chronology(){const correct=trips[Math.floor(Math.random()*trips.length)], mixed=shuffle(correct.map((t,i)=>({t,i})));const box=document.createElement('section');box.className='card';box.innerHTML='<h2>Exercise 4 — Put the road trip in order</h2><p>Put the stages in the correct order. Choose each chronological link word once.</p><div class="wordbank">First – Then – Next – After that – Finally</div>';const words=['First','Then','Next','After that','Finally'];mixed.forEach((x,j)=>{let d=document.createElement('div');d.className='stage';d.dataset.idx=x.i;d.innerHTML=`<select><option value="">Choose…</option>${words.map((w,i)=>`<option value="${i}">${w}</option>`).join('')}</select> ${x.t} <span class="feedback"></span>`;box.appendChild(d)});let s=document.createElement('div');s.className='score';let b=document.createElement('button');b.textContent='Check answers';b.onclick=()=>{let n=0;box.querySelectorAll('.stage').forEach(d=>{let ok=+d.querySelector('select').value===+d.dataset.idx && d.querySelector('select').value!=='';let f=d.querySelector('.feedback');f.textContent=ok?'✓':'✗';f.className='feedback '+(ok?'ok':'bad');if(ok)n++});s.textContent=`Score: ${n}/5`};let r=document.createElement('button');r.textContent='Try another road trip';r.onclick=()=>location.reload();box.append(b,r,s);return box}
+const app=document.getElementById('app');app.append(inputExercise('Exercise 1 — The verb BE','Complete with the correct form of BE. Some sentences are negative.',be,10));app.append(inputExercise('Exercise 2 — BE GOING TO','Complete with the correct form of BE + GOING TO and the verb in brackets.',going,10));app.append(inputExercise('Exercise 3 — Plans and purpose','Translate into English. Pay attention to plans, purpose and negative forms.',trans,10));app.append(chronology());
+</script></body></html>
