@@ -73,29 +73,48 @@ function diagnoseReformulation(value,model,attempt){
   return 'Check the quantity, the noun group and the place expression.';
 }
 function textExercise(title,help,fr,pool,makePrompt,type){
-  const card=document.createElement('section');card.className='card';const current=sample(pool);
-  card.innerHTML=`<h2>${title}</h2><p>${help}</p><p class="fr">${fr}</p><div class="questions"></div><button class="check">Check answers</button><button class="retry">Try again</button><div class="score"></div>`;
+  const card=document.createElement('section');
+  card.className='card';
+  const current=sample(pool).map(it=>({source:it,attempts:0,solved:false}));
+  card.innerHTML=`<h2>${title}</h2><p>${help}</p><p class="fr">${fr}</p><div class="questions"></div><button type="button" class="check">Check answers</button><button type="button" class="retry">Try again</button><div class="score"></div>`;
   const qs=card.querySelector('.questions');
-  current.forEach((it,i)=>{const d=document.createElement('div');d.className='q';d.innerHTML=`<strong>${i+1}.</strong> ${makePrompt(it)}<span class="answer"><input type="text" autocomplete="off" data-answers="${encodeURIComponent(JSON.stringify(it[1]))}" data-model="${encodeURIComponent(it[2])}" data-attempts="0" data-solved="0" placeholder="Type your answer here"></span><span class="feedback"></span><span class="hint"></span>`;qs.appendChild(d)});
-  card.querySelector('.check').onclick=()=>{
+  current.forEach((state,i)=>{
+    const it=state.source;
+    const d=document.createElement('div');
+    d.className='q';
+    d.innerHTML=`<strong>${i+1}.</strong> ${makePrompt(it)}<span class="answer"><input type="text" autocomplete="off" placeholder="Type your answer here"></span><span class="feedback"></span><span class="hint"></span>`;
+    state.row=d;
+    state.input=d.querySelector('input');
+    qs.appendChild(d);
+  });
+  card.querySelector('.check').addEventListener('click',()=>{
     let score=0;
-    card.querySelectorAll('input').forEach(inp=>{
-      const row=inp.closest('.q'), f=row.querySelector('.feedback'), h=row.querySelector('.hint');
-      if(inp.dataset.solved==='1'){score++;return;}
-      let answers=JSON.parse(decodeURIComponent(inp.dataset.answers)).map(norm);
-      if(type==='reform') answers=[...new Set([...answers,...reformulationAlternatives(decodeURIComponent(inp.dataset.model))])];
+    current.forEach(state=>{
+      const it=state.source, inp=state.input, row=state.row;
+      const f=row.querySelector('.feedback'), h=row.querySelector('.hint');
+      if(state.solved){score++;return;}
+      let answers=it[1].map(a=>norm(a));
+      if(type==='reform') answers=[...new Set([...answers,...reformulationAlternatives(it[2])])];
       const val=norm(inp.value);
       if(answers.includes(val)){
-        inp.dataset.solved='1';score++;f.textContent=' ✓ Correct!';f.className='feedback ok';h.innerHTML='';inp.disabled=true;
+        state.solved=true; score++;
+        f.textContent=' ✓ Correct!'; f.className='feedback ok'; h.textContent=''; inp.disabled=true;
+        const old=row.querySelector('.show-answer'); if(old) old.remove();
       }else{
-        const attempt=Number(inp.dataset.attempts)+1;inp.dataset.attempts=attempt;f.textContent=attempt<3?' △ Try again.':' ✗ Not yet.';f.className='feedback bad';
-        h.textContent=type==='reform'?diagnoseReformulation(inp.value,decodeURIComponent(inp.dataset.model),attempt):diagnoseTranslation(inp.value,decodeURIComponent(inp.dataset.model),attempt);
-        if(attempt>=3 && !row.querySelector('.show-answer')){const b=document.createElement('button');b.className='show-answer';b.textContent='Show answer';b.type='button';b.onclick=()=>{let m=row.querySelector('.model');if(!m){m=document.createElement('span');m.className='model';row.appendChild(m)}m.textContent='Answer: '+decodeURIComponent(inp.dataset.model)};row.appendChild(b)}
+        state.attempts++;
+        f.textContent=state.attempts<3?' △ Try again.':' ✗ Not yet.'; f.className='feedback bad';
+        h.textContent=type==='reform'?diagnoseReformulation(inp.value,it[2],state.attempts):diagnoseTranslation(inp.value,it[2],state.attempts);
+        if(state.attempts>=3 && !row.querySelector('.show-answer')){
+          const b=document.createElement('button'); b.className='show-answer'; b.textContent='Show answer'; b.type='button';
+          b.addEventListener('click',()=>{let m=row.querySelector('.model');if(!m){m=document.createElement('span');m.className='model';row.appendChild(m)}m.textContent='Answer: '+it[2];});
+          row.appendChild(b);
+        }
       }
     });
     card.querySelector('.score').textContent=`Score: ${score}/10 — you can correct the remaining answers and check again.`;
-  };
-  card.querySelector('.retry').onclick=()=>card.replaceWith(textExercise(title,help,fr,pool,makePrompt,type));return card
+  });
+  card.querySelector('.retry').addEventListener('click',()=>card.replaceWith(textExercise(title,help,fr,pool,makePrompt,type)));
+  return card;
 }
 function bindSelect(card,rebuild){card.querySelector('.check').onclick=()=>{let score=0;card.querySelectorAll('select').forEach(s=>{const f=s.parentElement.querySelector('.feedback');if(s.value===s.dataset.answer){score++;f.textContent='✓';f.className='feedback ok'}else{f.textContent=`✗ → ${s.dataset.answer}`;f.className='feedback bad'}});card.querySelector('.score').textContent=`Score: ${score}/10`};card.querySelector('.retry').onclick=()=>card.replaceWith(rebuild())}
 const app=document.getElementById('app');app.appendChild(selectExercise());app.appendChild(textExercise('Exercise 2 — Translate into English','Pay attention to quantity (some, many, a lot of, more than) and because + Subject + Verb.','Traduis en anglais. Fais attention aux expressions de quantité et à la construction <strong>because + Sujet + Verbe</strong>.',translations,it=>esc(it[0]),'translation'));app.appendChild(textExercise('Exercise 3 — Reformulate with THERE IS / THERE ARE','Rewrite the sentence. Use there is or there are.','Reformule la phrase en utilisant <strong>there is</strong> ou <strong>there are</strong>.',reformulations,it=>esc(it[0]),'reform'));
