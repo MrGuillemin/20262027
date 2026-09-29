@@ -76,21 +76,21 @@ function textExercise(title,help,fr,pool,makePrompt,type){
   const card=document.createElement('section');card.className='card';const current=sample(pool);
   card.innerHTML=`<h2>${title}</h2><p>${help}</p><p class="fr">${fr}</p><div class="questions"></div><button class="check">Check answers</button><button class="retry">Try again</button><div class="score"></div>`;
   const qs=card.querySelector('.questions');
-  current.forEach((it,i)=>{const d=document.createElement('div');d.className='q';d.innerHTML=`<strong>${i+1}.</strong> ${makePrompt(it)}<span class="answer"><input type="text" autocomplete="off" data-answers="${esc(JSON.stringify(it[1]))}" data-model="${esc(it[2])}" data-attempts="0" data-solved="0" placeholder="Type your answer here"></span><span class="feedback"></span><span class="hint"></span>`;qs.appendChild(d)});
+  current.forEach((it,i)=>{const d=document.createElement('div');d.className='q';d.innerHTML=`<strong>${i+1}.</strong> ${makePrompt(it)}<span class="answer"><input type="text" autocomplete="off" data-answers="${encodeURIComponent(JSON.stringify(it[1]))}" data-model="${encodeURIComponent(it[2])}" data-attempts="0" data-solved="0" placeholder="Type your answer here"></span><span class="feedback"></span><span class="hint"></span>`;qs.appendChild(d)});
   card.querySelector('.check').onclick=()=>{
     let score=0;
     card.querySelectorAll('input').forEach(inp=>{
       const row=inp.closest('.q'), f=row.querySelector('.feedback'), h=row.querySelector('.hint');
       if(inp.dataset.solved==='1'){score++;return;}
-      let answers=JSON.parse(inp.dataset.answers).map(norm);
-      if(type==='reform') answers=[...new Set([...answers,...reformulationAlternatives(inp.dataset.model)])];
+      let answers=JSON.parse(decodeURIComponent(inp.dataset.answers)).map(norm);
+      if(type==='reform') answers=[...new Set([...answers,...reformulationAlternatives(decodeURIComponent(inp.dataset.model))])];
       const val=norm(inp.value);
       if(answers.includes(val)){
         inp.dataset.solved='1';score++;f.textContent=' ✓ Correct!';f.className='feedback ok';h.innerHTML='';inp.disabled=true;
       }else{
         const attempt=Number(inp.dataset.attempts)+1;inp.dataset.attempts=attempt;f.textContent=attempt<3?' △ Try again.':' ✗ Not yet.';f.className='feedback bad';
-        h.textContent=type==='reform'?diagnoseReformulation(inp.value,inp.dataset.model,attempt):diagnoseTranslation(inp.value,inp.dataset.model,attempt);
-        if(attempt>=3 && !row.querySelector('.show-answer')){const b=document.createElement('button');b.className='show-answer';b.textContent='Show answer';b.type='button';b.onclick=()=>{let m=row.querySelector('.model');if(!m){m=document.createElement('span');m.className='model';row.appendChild(m)}m.textContent='Answer: '+inp.dataset.model};row.appendChild(b)}
+        h.textContent=type==='reform'?diagnoseReformulation(inp.value,decodeURIComponent(inp.dataset.model),attempt):diagnoseTranslation(inp.value,decodeURIComponent(inp.dataset.model),attempt);
+        if(attempt>=3 && !row.querySelector('.show-answer')){const b=document.createElement('button');b.className='show-answer';b.textContent='Show answer';b.type='button';b.onclick=()=>{let m=row.querySelector('.model');if(!m){m=document.createElement('span');m.className='model';row.appendChild(m)}m.textContent='Answer: '+decodeURIComponent(inp.dataset.model)};row.appendChild(b)}
       }
     });
     card.querySelector('.score').textContent=`Score: ${score}/10 — you can correct the remaining answers and check again.`;
