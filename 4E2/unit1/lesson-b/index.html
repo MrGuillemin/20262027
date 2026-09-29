@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>4E2 – Unit 1 – Lesson B</title>
 <style>
-body{font-family:system-ui,-apple-system,sans-serif;margin:0;background:#f5f7fb;color:#182033}.wrap{max-width:900px;margin:auto;padding:24px}.top a{color:#4056a1;text-decoration:none}.card{background:#fff;border-radius:16px;padding:22px;margin:20px 0;box-shadow:0 3px 14px #00000012}.q{padding:14px 0;border-bottom:1px solid #e8eaf0}.q:last-child{border:0}select,input{font:inherit;padding:8px;border:1px solid #cdd3df;border-radius:8px;margin:5px}input{width:min(95%,650px)}button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;cursor:pointer;margin:10px 8px 0 0}.check{background:#243b75;color:white}.retry{background:#e8ebf3}.feedback{font-weight:700;margin-left:8px}.ok{color:#16803b}.bad{color:#b42318}.score{font-weight:800;margin-top:15px}.note,.fr{color:#586174}.fr{font-style:italic}.answer{display:block;margin-top:5px}
+body{font-family:system-ui,-apple-system,sans-serif;margin:0;background:#f5f7fb;color:#182033}.wrap{max-width:900px;margin:auto;padding:24px}.top a{color:#4056a1;text-decoration:none}.card{background:#fff;border-radius:16px;padding:22px;margin:20px 0;box-shadow:0 3px 14px #00000012}.q{padding:14px 0;border-bottom:1px solid #e8eaf0}.q:last-child{border:0}select,input{font:inherit;padding:8px;border:1px solid #cdd3df;border-radius:8px;margin:5px}input{width:min(95%,650px)}button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;cursor:pointer;margin:10px 8px 0 0}.check{background:#243b75;color:white}.retry{background:#e8ebf3}.feedback{font-weight:700;margin-left:8px}.ok{color:#16803b}.bad{color:#b42318}.score{font-weight:800;margin-top:15px}.note,.fr{color:#586174}.fr{font-style:italic}.answer{display:block;margin-top:5px}.hint{display:block;margin:6px 0 0 5px;font-weight:600;color:#9a6700}.show-answer{background:#fff3cd;color:#6b4f00;padding:7px 10px;margin-top:7px}.model{display:block;margin-top:6px;color:#4056a1;font-weight:700}
 </style></head><body><main class="wrap"><p class="top"><a href="../index.html">← Unit 1</a></p><h1>Lesson B</h1><p class="note">10 random questions per exercise. Check your answers, then try again for a new selection.</p><div id="app"></div></main>
 <script>
 const connectors=[
@@ -45,7 +45,58 @@ function sample(a,n=10){return [...a].sort(()=>Math.random()-.5).slice(0,n)}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function norm(s){return s.toLowerCase().trim().replace(/[’‘]/g,"'").replace(/[.,!?;:]/g,'').replace(/\s+/g,' ')}
 function selectExercise(){const ex={title:'Exercise 1 — Connectors',help:'Complete with and, also or so.',current:sample(connectors)};const card=document.createElement('section');card.className='card';card.innerHTML=`<h2>${ex.title}</h2><p>${ex.help}</p><p class="fr">Complète avec <strong>and, also</strong> ou <strong>so</strong>.</p><div class="questions"></div><button class="check">Check answers</button><button class="retry">Try again</button><div class="score"></div>`;const qs=card.querySelector('.questions');ex.current.forEach((it,i)=>{const [q,a]=it,parts=q.split('_____');const d=document.createElement('div');d.className='q';d.innerHTML=`<strong>${i+1}.</strong> ${esc(parts[0])}<select data-answer="${a}"><option value="">— choose —</option><option>and</option><option>also</option><option>so</option></select>${esc(parts[1]||'')} <span class="feedback"></span>`;qs.appendChild(d)});bindSelect(card,selectExercise);return card}
-function textExercise(title,help,fr,pool,makePrompt){const card=document.createElement('section');card.className='card';const current=sample(pool);card.innerHTML=`<h2>${title}</h2><p>${help}</p><p class="fr">${fr}</p><div class="questions"></div><button class="check">Check answers</button><button class="retry">Try again</button><div class="score"></div>`;const qs=card.querySelector('.questions');current.forEach((it,i)=>{const d=document.createElement('div');d.className='q';d.innerHTML=`<strong>${i+1}.</strong> ${makePrompt(it)}<span class="answer"><input type="text" autocomplete="off" data-answers="${esc(JSON.stringify(it[1]))}" data-model="${esc(it[2])}" placeholder="Type your answer here"></span><span class="feedback"></span>`;qs.appendChild(d)});card.querySelector('.check').onclick=()=>{let score=0;card.querySelectorAll('input').forEach(inp=>{const answers=JSON.parse(inp.dataset.answers).map(norm),f=inp.parentElement.parentElement.querySelector('.feedback');if(answers.includes(norm(inp.value))){score++;f.textContent=' ✓';f.className='feedback ok'}else{f.textContent=` ✗ → ${inp.dataset.model}`;f.className='feedback bad'}});card.querySelector('.score').textContent=`Score: ${score}/10`};card.querySelector('.retry').onclick=()=>card.replaceWith(textExercise(title,help,fr,pool,makePrompt));return card}
+function reformulationAlternatives(model){
+  const out=[norm(model)];
+  const m=model.match(/^(In [^,]+),\s*(there (?:is|are) .+)\.?$/i);
+  if(m){out.push(norm(`${m[2]} ${m[1].toLowerCase()}`));}
+  return out;
+}
+function diagnoseTranslation(value,model,attempt){
+  const v=norm(value), m=norm(model);
+  if(!v) return 'Type an answer first.';
+  if(m.includes('there are') && v.includes('there is')) return 'Check THERE IS / THERE ARE: the noun is plural.';
+  if(m.includes('there is') && v.includes('there are')) return 'Check THERE IS / THERE ARE: this noun is singular or uncountable.';
+  if(m.includes('because') && !v.includes('because')) return 'Remember: because + subject + verb.';
+  const quantities=['some','many','a lot of','more than'];
+  if(quantities.some(q=>m.includes(q)) && !quantities.some(q=>v.includes(q))) return 'Check the expression of quantity.';
+  if(attempt===1) return 'Almost? Check the grammar and the key vocabulary.';
+  return 'Check the sentence structure and compare every idea with the French sentence.';
+}
+function diagnoseReformulation(value,model,attempt){
+  const v=norm(value),m=norm(model);
+  if(!v) return 'Type an answer first.';
+  if(m.includes('there are') && !v.includes('there are')) return 'The noun is plural: use THERE ARE.';
+  if(m.includes('there is') && !v.includes('there is')) return 'The noun is singular or uncountable: use THERE IS.';
+  for(const q of ['many','some','a lot of','more than']) if(m.includes(q) && !v.includes(q)) return `Don't forget the quantity: ${q.toUpperCase()}.`;
+  if(v.includes('you have')) return 'Replace YOU HAVE with THERE IS / THERE ARE.';
+  if(attempt===1) return 'Good start. Check that you kept all the information from the original sentence.';
+  return 'Check the quantity, the noun group and the place expression.';
+}
+function textExercise(title,help,fr,pool,makePrompt,type){
+  const card=document.createElement('section');card.className='card';const current=sample(pool);
+  card.innerHTML=`<h2>${title}</h2><p>${help}</p><p class="fr">${fr}</p><div class="questions"></div><button class="check">Check answers</button><button class="retry">Try again</button><div class="score"></div>`;
+  const qs=card.querySelector('.questions');
+  current.forEach((it,i)=>{const d=document.createElement('div');d.className='q';d.innerHTML=`<strong>${i+1}.</strong> ${makePrompt(it)}<span class="answer"><input type="text" autocomplete="off" data-answers="${esc(JSON.stringify(it[1]))}" data-model="${esc(it[2])}" data-attempts="0" data-solved="0" placeholder="Type your answer here"></span><span class="feedback"></span><span class="hint"></span>`;qs.appendChild(d)});
+  card.querySelector('.check').onclick=()=>{
+    let score=0;
+    card.querySelectorAll('input').forEach(inp=>{
+      const row=inp.closest('.q'), f=row.querySelector('.feedback'), h=row.querySelector('.hint');
+      if(inp.dataset.solved==='1'){score++;return;}
+      let answers=JSON.parse(inp.dataset.answers).map(norm);
+      if(type==='reform') answers=[...new Set([...answers,...reformulationAlternatives(inp.dataset.model)])];
+      const val=norm(inp.value);
+      if(answers.includes(val)){
+        inp.dataset.solved='1';score++;f.textContent=' ✓ Correct!';f.className='feedback ok';h.innerHTML='';inp.disabled=true;
+      }else{
+        const attempt=Number(inp.dataset.attempts)+1;inp.dataset.attempts=attempt;f.textContent=attempt<3?' △ Try again.':' ✗ Not yet.';f.className='feedback bad';
+        h.textContent=type==='reform'?diagnoseReformulation(inp.value,inp.dataset.model,attempt):diagnoseTranslation(inp.value,inp.dataset.model,attempt);
+        if(attempt>=3 && !row.querySelector('.show-answer')){const b=document.createElement('button');b.className='show-answer';b.textContent='Show answer';b.type='button';b.onclick=()=>{let m=row.querySelector('.model');if(!m){m=document.createElement('span');m.className='model';row.appendChild(m)}m.textContent='Answer: '+inp.dataset.model};row.appendChild(b)}
+      }
+    });
+    card.querySelector('.score').textContent=`Score: ${score}/10 — you can correct the remaining answers and check again.`;
+  };
+  card.querySelector('.retry').onclick=()=>card.replaceWith(textExercise(title,help,fr,pool,makePrompt,type));return card
+}
 function bindSelect(card,rebuild){card.querySelector('.check').onclick=()=>{let score=0;card.querySelectorAll('select').forEach(s=>{const f=s.parentElement.querySelector('.feedback');if(s.value===s.dataset.answer){score++;f.textContent='✓';f.className='feedback ok'}else{f.textContent=`✗ → ${s.dataset.answer}`;f.className='feedback bad'}});card.querySelector('.score').textContent=`Score: ${score}/10`};card.querySelector('.retry').onclick=()=>card.replaceWith(rebuild())}
-const app=document.getElementById('app');app.appendChild(selectExercise());app.appendChild(textExercise('Exercise 2 — Translate into English','Pay attention to quantity (some, many, a lot of, more than) and because + Subject + Verb.','Traduis en anglais. Fais attention aux expressions de quantité et à la construction <strong>because + Sujet + Verbe</strong>.',translations,it=>esc(it[0])));app.appendChild(textExercise('Exercise 3 — Reformulate with THERE IS / THERE ARE','Rewrite the sentence. Use there is or there are.','Reformule la phrase en utilisant <strong>there is</strong> ou <strong>there are</strong>.',reformulations,it=>esc(it[0])));
+const app=document.getElementById('app');app.appendChild(selectExercise());app.appendChild(textExercise('Exercise 2 — Translate into English','Pay attention to quantity (some, many, a lot of, more than) and because + Subject + Verb.','Traduis en anglais. Fais attention aux expressions de quantité et à la construction <strong>because + Sujet + Verbe</strong>.',translations,it=>esc(it[0]),'translation'));app.appendChild(textExercise('Exercise 3 — Reformulate with THERE IS / THERE ARE','Rewrite the sentence. Use there is or there are.','Reformule la phrase en utilisant <strong>there is</strong> ou <strong>there are</strong>.',reformulations,it=>esc(it[0]),'reform'));
 </script></body></html>
