@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nombres 0 à 100 — Révision Quest</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main>
+<section class="top">
+  <h1>🔢 Number Quest</h1>
+  <p>Apprends les nombres anglais de 0 à 100 !</p>
+</section>
+
+<section id="menu" class="card">
+  <div class="breadcrumb"><a href="../index.html">Accueil</a> › <a href="index.html">Anglais</a> › Nombres</div>
+  <div class="grid">
+    <button class="tile english" onclick="start(1)"><b>⭐ Niveau 1 · 0–10</b>Les nombres de base</button>
+    <button class="tile english" onclick="start(2)"><b>⭐⭐ Niveau 2 · 11–20</b>Les nombres spéciaux et <i>-teen</i></button>
+    <button class="tile english" onclick="start(3)"><b>⭐⭐⭐ Niveau 3 · Dizaines</b>twenty, thirty… one hundred</button>
+    <button class="tile english" onclick="start(4)"><b>⭐⭐⭐⭐ Niveau 4 · 21–99</b>Construis les nombres</button>
+    <button class="tile english" onclick="start(5)"><b>🏆 Grand défi · 0–100</b>Tout mélanger !</button>
+  </div>
+  <div class="tip"><b>💡 Les pièges</b><br>
+  13 <b>thirteen</b> ↔ 30 <b>thirty</b> · 14 <b>fourteen</b> ↔ 40 <b>forty</b> ·
+  15 <b>fifteen</b> ↔ 50 <b>fifty</b> · 18 <b>eighteen</b> ↔ 80 <b>eighty</b>.
+  </div>
+</section>
+
+<section id="game" class="card hidden">
+ <div class="stats"><span id="levelName"></span><span id="counter"></span></div>
+ <div class="progress"><div id="bar" class="bar"></div></div>
+ <p id="instruction" class="instruction"></p>
+ <div id="question" class="question"></div>
+ <div id="interaction"></div>
+ <div id="feedback" class="feedback hidden"></div>
+ <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+   <button class="secondary" onclick="home()">← Niveaux</button>
+   <button id="next" class="primary hidden" onclick="nextQuestion()">Question suivante →</button>
+ </div>
+</section>
+
+<section id="result" class="card hidden">
+ <h2 style="text-align:center">Résultat</h2>
+ <div id="bigscore" class="bigscore"></div>
+ <div id="stars" class="stars"></div>
+ <p id="resultText" style="text-align:center"></p>
+ <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+  <button class="primary" onclick="restart()">Rejouer</button>
+  <button class="secondary" onclick="home()">Choisir un niveau</button>
+ </div>
+</section>
+
+<footer><a href="index.html">← Retour aux chapitres d’anglais</a></footer>
+</main>
+
+<script src="../app.js"></script>
+<script>
+const words=["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+const tens=["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+function toEnglish(n){
+ if(n<20)return words[n]; if(n===100)return "one hundred";
+ const t=Math.floor(n/10),u=n%10; return tens[t]+(u?"-"+words[u]:"");
+}
+let state={level:1,q:0,score:0,current:0,mode:"",wrong:[],answered:false};
+const ranges={1:[0,10],2:[11,20],4:[21,99],5:[0,100]};
+const names={1:"Niveau 1 · 0–10",2:"Niveau 2 · 11–20",3:"Niveau 3 · Dizaines",4:"Niveau 4 · 21–99",5:"Grand défi · 0–100"};
+
+function numberForLevel(){
+ if(state.wrong.length && Math.random()<.28)return state.wrong.splice(0,1)[0];
+ if(state.level===3){const a=[20,30,40,50,60,70,80,90,100];return a[rand(0,a.length-1)]}
+ const [a,b]=ranges[state.level];return rand(a,b)
+}
+function start(l){
+ state={level:l,q:0,score:0,current:0,mode:"",wrong:[],answered:false};
+ document.getElementById("menu").classList.add("hidden");
+ document.getElementById("result").classList.add("hidden");
+ document.getElementById("game").classList.remove("hidden");
+ nextQuestion();
+}
+function restart(){start(state.level)}
+function home(){
+ document.getElementById("game").classList.add("hidden");
+ document.getElementById("result").classList.add("hidden");
+ document.getElementById("menu").classList.remove("hidden");
+}
+function nextQuestion(){
+ if(state.q>=10)return finish();
+ state.q++;state.answered=false;state.current=numberForLevel();
+ const modes=state.level===4?["write","choice","reverse","build"]:["write","choice","reverse"];
+ state.mode=modes[rand(0,modes.length-1)];
+ document.getElementById("levelName").textContent=names[state.level];
+ document.getElementById("counter").textContent=`${state.q}/10`;
+ document.getElementById("bar").style.width=((state.q-1)*10)+"%";
+ document.getElementById("feedback").className="feedback hidden";
+ document.getElementById("next").classList.add("hidden");
+ render();
+}
+function render(){
+ const n=state.current, eng=toEnglish(n), I=document.getElementById("interaction");
+ if(state.mode==="write"){
+  setQ(n,"Écris ce nombre en anglais.");
+  I.innerHTML=`<input id="input" class="answer" autocomplete="off" placeholder="Ta réponse…" onkeydown="if(event.key==='Enter')checkWrite()"><button class="primary" onclick="checkWrite()">Valider</button>`;
+  setTimeout(()=>document.getElementById("input").focus(),50);
+ } else if(state.mode==="reverse"){
+  setQ(eng,"Quel est ce nombre ?");
+  let opts=makeNumOptions(n);
+  I.innerHTML=`<div class="options">${opts.map(x=>`<button class="option" onclick="check(${x}===${n})">${x}</button>`).join("")}</div>`;
+ } else if(state.mode==="build"){
+  setQ(n,"Construis le nombre en anglais.");
+  const correct=eng.split("-"), distract=[...new Set([correct[0],words[rand(1,9)],tens[rand(2,9)],correct[1]].filter(Boolean))].sort(()=>Math.random()-.5);
+  I.innerHTML=`<div id="built" class="answer" style="min-height:58px"></div><div class="options">${distract.map(x=>`<button class="option" onclick="addPart('${x}')">${x}</button>`).join("")}</div><button class="primary" style="margin-top:10px" onclick="checkBuild()">Valider</button>`;
+ } else {
+  setQ(n,"Choisis la bonne écriture.");
+  let opts=makeWordOptions(n);
+  I.innerHTML=`<div class="options">${opts.map(x=>`<button class="option" onclick="check('${x}'==='${eng}')">${x}</button>`).join("")}</div>`;
+ }
+}
+function setQ(q,i){document.getElementById("question").textContent=q;document.getElementById("instruction").textContent=i}
+function makeNumOptions(n){let s=new Set([n]);while(s.size<4)s.add(Math.max(0,Math.min(100,n+rand(-12,12))));return shuffle([...s])}
+function makeWordOptions(n){let s=new Set([toEnglish(n)]);while(s.size<4)s.add(toEnglish(numberForLevel()));return shuffle([...s])}
+function normalize(s){return s.toLowerCase().trim().replace(/\s+/g," ").replace(/–|—/g,"-")}
+function checkWrite(){if(state.answered)return;const v=normalize(document.getElementById("input").value);check(v===toEnglish(state.current))}
+let parts=[];
+function addPart(x){if(state.answered)return;parts.push(x);document.getElementById("built").textContent=parts.join("-")}
+function checkBuild(){if(state.answered)return;check(parts.join("-")===toEnglish(state.current));parts=[]}
+function explanation(n){
+ const e=toEnglish(n);
+ if(n===40)return `Attention : 40 s’écrit <b>forty</b>, jamais <i>fourty</i>.`;
+ if([13,14,15,16,17,18,19].includes(n))return `<b>${e}</b> est un nombre en <b>-teen</b>. Attention à ne pas le confondre avec la dizaine en <b>-ty</b>.`;
+ if(n>=21&&n<100&&n%10)return `${Math.floor(n/10)*10} = <b>${tens[Math.floor(n/10)]}</b> et ${n%10} = <b>${words[n%10]}</b>.<br>On les assemble : <b>${e}</b>.`;
+ if(n===100)return `100 se dit <b>one hundred</b>.`;
+ return `${n} se dit <b>${e}</b>.`;
+}
+function check(ok){
+ if(state.answered)return;state.answered=true;
+ const f=document.getElementById("feedback");f.classList.remove("hidden");
+ if(ok){state.score++;f.classList.add("good");f.innerHTML=`✅ <b>Bravo !</b> ${state.current} = <b>${toEnglish(state.current)}</b>.`}
+ else{f.classList.add("bad");f.innerHTML=`❌ <b>Pas tout à fait.</b><br>${explanation(state.current)}`;state.wrong.push(state.current)}
+ document.getElementById("next").classList.remove("hidden");
+ document.getElementById("bar").style.width=(state.q*10)+"%";
+}
+function finish(){
+ document.getElementById("game").classList.add("hidden");
+ document.getElementById("result").classList.remove("hidden");
+ renderResult(state.score,10);
+ saveBest(`numbers-${state.level}`,state.score);
+}
+</script>
+</body>
+</html>
