@@ -1,13 +1,540 @@
-const adjectives=['talkative','helpful','shy','sociable','curious','funny','quiet','competitive','creative'];
-const clues=[['I can talk for hours with my friends!','talkative'],['I always help my classmates.','helpful'],['I feel nervous when I meet strangers.','shy'],['I love parties and meeting people.','sociable'],['I want to discover how things work.','curious'],['I love telling jokes.','funny'],['I prefer listening to music alone in silence.','quiet'],['I always want to win at sports.','competitive'],['I love drawing and inventing stories.','creative'],['I speak a lot during lunch.','talkative'],['I help my little brother with homework.','helpful'],['I do not like speaking in front of the class.','shy'],['I enjoy talking to new students.','sociable'],['I always ask lots of questions.','curious'],['I make my friends laugh.','funny'],['I rarely speak in class.','quiet'],['I hate losing games.','competitive'],['I enjoy making new things.','creative'],['I talk all the time.','talkative'],['I enjoy helping other people.','helpful'],['I blush when I meet new people.','shy'],['I make friends easily.','sociable'],['I want to learn about everything.','curious'],['I tell hilarious stories.','funny'],['I like peaceful places and silence.','quiet'],['I always try to finish first.','competitive'],['I write imaginative stories.','creative'],['I love long conversations.','talkative'],['I help new students find their classrooms.','helpful'],['I design my own comics.','creative']];
-const pairs=[['Sophie is sociable','she enjoys talking to new people'],['Jack is competitive','he always wants to finish first'],['Lucy is creative','she loves inventing stories'],['Harry is quiet','he prefers staying at home alone'],['Tom is shy','he does not like speaking in front of the class'],['Emma is helpful','she enjoys helping younger students'],['Mia is curious','she asks lots of questions'],['Ben is funny','he tells jokes'],['Olivia is talkative','she talks for hours'],['Leo is competitive','he hates losing'],['Lily is shy','she feels nervous with strangers'],['Noah is helpful','he helps his friends'],['Ava is creative','she draws her own characters'],['Max is sociable','he makes friends easily'],['Ella is quiet','she likes silence'],['Sam is curious','he wants to understand everything'],['Chloe is funny','she makes everyone laugh'],['Alex is talkative','he never stops speaking'],['Ruby is helpful','she explains homework'],['Oscar is creative','he writes stories'],['Grace is sociable','she enjoys parties'],['Ethan is competitive','he wants to win every game'],['Isla is quiet','she rarely speaks in class'],['Lucas is curious','he loves discovering new things'],['Zoe is shy','she avoids speaking in public'],['Hugo is funny','he loves telling jokes'],['Nina is helpful','she helps younger pupils'],['Adam is talkative','he loves long conversations'],['Rose is creative','she invents new games'],['Finn is competitive','he tries to be the best']];
-const translations=[['Je suis timide parce que je n’aime pas parler aux nouvelles personnes.','I am shy because I do not like talking to new people.'],['Mon frère est drôle parce qu’il aime raconter des blagues.','My brother is funny because he likes telling jokes.'],['Mes amis sont curieux parce qu’ils aiment découvrir de nouvelles choses.','My friends are curious because they like discovering new things.'],['Elle est serviable parce qu’elle aime aider les autres.','She is helpful because she likes helping others.'],['Tom est compétitif parce qu’il n’aime pas perdre.','Tom is competitive because he does not like losing.'],['Nous sommes sociables parce que nous aimons rencontrer de nouvelles personnes.','We are sociable because we like meeting new people.'],['Ma sœur n’est pas bavarde parce qu’elle n’aime pas parler en classe.','My sister is not talkative because she does not like talking in class.'],['Je suis créatif, mais mon meilleur ami est timide parce qu’il n’aime pas rencontrer de nouvelles personnes.','I am creative, but my best friend is shy because he does not like meeting new people.']];
-const picked={};function shuffle(a){return [...a].sort(()=>Math.random()-.5)}function norm(s){return s.toLowerCase().replace(/[’]/g,"'").replace(/[.!?,]/g,'').replace(/\s+/g,' ').trim().replace(/\bdoesn't\b/g,'does not').replace(/\bdon't\b/g,'do not').replace(/\bisn't\b/g,'is not').replace(/\baren't\b/g,'are not').replace(/\bi'm\b/g,'i am').replace(/\bhe's\b/g,'he is').replace(/\bshe's\b/g,'she is').replace(/\bwe're\b/g,'we are').replace(/\bthey're\b/g,'they are')}
-function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function renderPool(n){let data=n===1?clues:n===2?pairs:translations;picked[n]=shuffle(data).slice(0,n===3?8:10);if(n===2){let opts=shuffle(picked[n].map(x=>x[1]));picked.opts=opts;document.getElementById('ex2').innerHTML=picked[n].map((x,i)=>`<div class="q"><label>${i+1}. ${escapeHTML(x[0])} because…</label><select id="answer2_${i}"><option value="">Choose an ending…</option>${opts.map((o,j)=>`<option value="${j}">${escapeHTML(o)}</option>`).join('')}</select><div class="feedback" id="fb2_${i}"></div></div>`).join('')}else{document.getElementById('ex'+n).innerHTML=picked[n].map((x,i)=>`<div class="q"><label>${i+1}. ${escapeHTML(x[0])}${n===1?' I am …':''}</label><input id="answer${n}_${i}" autocomplete="off"><div class="feedback" id="fb${n}_${i}"></div></div>`).join('')}document.getElementById('score'+n).textContent=''}
-function translationCheck(answer,expected){let a=norm(answer),e=norm(expected);if(a===e)return true;let variations=[a.replace(/\b(talking|telling|discovering|helping|losing|meeting)\b/g,(x)=>({talking:'to talk',telling:'to tell',discovering:'to discover',helping:'to help',losing:'to lose',meeting:'to meet'}[x]))];if(variations.includes(e))return true;let opts=[e.replace(/\bothers\b/g,'other people'),e.replace(/\bnew people\b/g,'people they do not know'),e.replace(/\blike talking\b/g,'like to talk'),e.replace(/\blikes talking\b/g,'likes to talk'),e.replace(/\blike meeting\b/g,'like to meet'),e.replace(/\blikes meeting\b/g,'likes to meet'),e.replace(/\blikes telling\b/g,'likes to tell'),e.replace(/\blike discovering\b/g,'like to discover'),e.replace(/\blikes helping\b/g,'likes to help'),e.replace(/\blike losing\b/g,'like to lose')];return opts.includes(a)}
-function diagnose(a,e){let s=norm(a);if(!s)return 'Écris une réponse avant de vérifier.';if(!/\bbecause\b/.test(s))return 'Pense à utiliser because pour donner une raison.';if(/\b(he|she|tom|brother|sister|friend)\s+(like|do not|are|have)\b/.test(s))return 'Avec he / she ou un sujet singulier, vérifie likes, does not, is et has.';if(/\b(i|we|they|friends)\s+(is|likes|does not)\b/.test(s))return 'Vérifie l’accord du verbe avec le sujet (I am, we are, they like…).';if(/\bdoes not likes?\b|\bdo not likes\b/.test(s))return 'Après do not / does not, utilise la base verbale : like, pas likes.';if(/\blike (meet|talk|help|discover|lose|tell)\b|\blikes (meet|talk|help|discover|lose|tell)\b/.test(s))return 'Après like / likes, utilise ici -ing ou to + verbe.';if(!/\b(am|is|are)\b/.test(s))return 'Vérifie la présence de BE : am, is ou are.';return 'Ta phrase ne correspond pas encore à la traduction attendue. Vérifie le vocabulaire, le sujet et la construction avec because.'}
-function checkPool(n){let good=0;picked[n].forEach((x,i)=>{let field=document.getElementById(`answer${n}_${i}`),v=n===2?picked.opts[Number(field.value)]:field.value,correct=n===1?norm(v)===x[1]:n===2?field.value!==''&&v===x[1]:translationCheck(v,x[1]);good+=correct?1:0;let fb=document.getElementById(`fb${n}_${i}`);fb.className='feedback '+(correct?'ok':'bad');fb.textContent=correct?'✓ Correct !':(n===1?'Essaie encore : relis la définition.':n===2?'Relis le sens de l’adjectif et de la justification.':diagnose(v,x[1]))});document.getElementById('score'+n).textContent=`Score : ${good} / ${picked[n].length}`}
-function writingAdvice(text,subject){let s=norm(text),issues=[];if(!s)return ['Écris une phrase pour commencer.'];if(!/\bbecause\b/.test(s))issues.push('Ajoute because pour expliquer la personnalité.');if(!adjectives.some(x=>new RegExp('\\b'+x+'\\b').test(s)))issues.push('Utilise un adjectif de personnalité étudié en classe.');if(subject==='me'&&!/\bi (am|\b'm\b)/.test(s))issues.push('Pour parler de toi, commence par I am…');if(subject==='friend'&&!/\b(is|are)\b/.test(s))issues.push('Pour parler d’un camarade, utilise par exemple He is / She is / My classmate is…');if(/\b(he|she) (like|do not|are)\b/.test(s))issues.push('Avec he ou she : likes, does not, is.');if(/\b(i|we|they) (is|likes|does not)\b/.test(s))issues.push('Vérifie l’accord : I am, we are, I like…');if(/\b(does not likes|do not likes)\b/.test(s))issues.push('Après does not ou do not, utilise like sans -s.');if(/\b(like|likes) (meet|help|talk|play|discover|tell|lose)\b/.test(s))issues.push('Après like / likes, utilise -ing ou to + verbe.');if(!/\b(am|is|are)\b/.test(s))issues.push('Il manque peut-être BE : am, is ou are.');if(s.split(/\s+/).length<6)issues.push('Développe ta phrase avec une vraie justification après because.');return issues}
-function checkWriting(){let blocks=[['aboutMe','me','Phrase sur toi'],['aboutFriend','friend','Phrase sur ton camarade']];document.getElementById('writingFeedback').innerHTML=blocks.map(([id,type,title])=>{let issues=writingAdvice(document.getElementById(id).value,type);return `<p><strong>${title} :</strong> ${issues.length?issues.map(escapeHTML).join(' '):'✓ Bonne construction apparente ! Vérifie que ton idée correspond bien à ce que tu voulais dire.'}</p>`}).join('')}
-[1,2,3].forEach(renderPool);
+/* Class-specific content. Shared behaviour lives in assets/js/app.js. */
+window.EnglishPractice.mount({
+  "id": "5E4/unit1/lesson-c",
+  "className": "5E4",
+  "unit": "Unit 1",
+  "title": "Lesson C",
+  "description": "Personality adjectives and BECAUSE",
+  "exercises": [
+    {
+      "title": "Exercise 1 — Personality adjectives",
+      "type": "text",
+      "instruction": "Complete with the personality adjective. quiet · helpful · competitive · sociable · shy · curious · funny · talkative · creative",
+      "items": [
+        {
+          "id": "q1",
+          "prompt": "I can talk for hours with my friends!",
+          "answers": [
+            "talkative"
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "I always help my classmates.",
+          "answers": [
+            "helpful"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "I feel nervous when I meet strangers.",
+          "answers": [
+            "shy"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "I love parties and meeting people.",
+          "answers": [
+            "sociable"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "I want to discover how things work.",
+          "answers": [
+            "curious"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "I love telling jokes.",
+          "answers": [
+            "funny"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "I prefer listening to music alone in silence.",
+          "answers": [
+            "quiet"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "I always want to win at sports.",
+          "answers": [
+            "competitive"
+          ]
+        },
+        {
+          "id": "q9",
+          "prompt": "I love drawing and inventing stories.",
+          "answers": [
+            "creative"
+          ]
+        },
+        {
+          "id": "q10",
+          "prompt": "I speak a lot during lunch.",
+          "answers": [
+            "talkative"
+          ]
+        },
+        {
+          "id": "q11",
+          "prompt": "I help my little brother with homework.",
+          "answers": [
+            "helpful"
+          ]
+        },
+        {
+          "id": "q12",
+          "prompt": "I do not like speaking in front of the class.",
+          "answers": [
+            "shy"
+          ]
+        },
+        {
+          "id": "q13",
+          "prompt": "I enjoy talking to new students.",
+          "answers": [
+            "sociable"
+          ]
+        },
+        {
+          "id": "q14",
+          "prompt": "I always ask lots of questions.",
+          "answers": [
+            "curious"
+          ]
+        },
+        {
+          "id": "q15",
+          "prompt": "I make my friends laugh.",
+          "answers": [
+            "funny"
+          ]
+        },
+        {
+          "id": "q16",
+          "prompt": "I rarely speak in class.",
+          "answers": [
+            "quiet"
+          ]
+        },
+        {
+          "id": "q17",
+          "prompt": "I hate losing games.",
+          "answers": [
+            "competitive"
+          ]
+        },
+        {
+          "id": "q18",
+          "prompt": "I enjoy making new things.",
+          "answers": [
+            "creative"
+          ]
+        },
+        {
+          "id": "q19",
+          "prompt": "I talk all the time.",
+          "answers": [
+            "talkative"
+          ]
+        },
+        {
+          "id": "q20",
+          "prompt": "I enjoy helping other people.",
+          "answers": [
+            "helpful"
+          ]
+        },
+        {
+          "id": "q21",
+          "prompt": "I blush when I meet new people.",
+          "answers": [
+            "shy"
+          ]
+        },
+        {
+          "id": "q22",
+          "prompt": "I make friends easily.",
+          "answers": [
+            "sociable"
+          ]
+        },
+        {
+          "id": "q23",
+          "prompt": "I want to learn about everything.",
+          "answers": [
+            "curious"
+          ]
+        },
+        {
+          "id": "q24",
+          "prompt": "I tell hilarious stories.",
+          "answers": [
+            "funny"
+          ]
+        },
+        {
+          "id": "q25",
+          "prompt": "I like peaceful places and silence.",
+          "answers": [
+            "quiet"
+          ]
+        },
+        {
+          "id": "q26",
+          "prompt": "I always try to finish first.",
+          "answers": [
+            "competitive"
+          ]
+        },
+        {
+          "id": "q27",
+          "prompt": "I write imaginative stories.",
+          "answers": [
+            "creative"
+          ]
+        },
+        {
+          "id": "q28",
+          "prompt": "I love long conversations.",
+          "answers": [
+            "talkative"
+          ]
+        },
+        {
+          "id": "q29",
+          "prompt": "I help new students find their classrooms.",
+          "answers": [
+            "helpful"
+          ]
+        },
+        {
+          "id": "q30",
+          "prompt": "I design my own comics.",
+          "answers": [
+            "creative"
+          ]
+        }
+      ],
+      "count": 10,
+      "id": "ex1",
+      "mode": "text",
+      "instructionFr": "Écris les mots manquants ou la phrase complète demandée."
+    },
+    {
+      "title": "Exercise 2 — BECAUSE",
+      "type": "matching",
+      "instruction": "Match each beginning with a logical ending.",
+      "items": [
+        {
+          "id": "q1",
+          "prompt": "Sophie is sociable because…",
+          "answers": [
+            "she enjoys talking to new people"
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "Jack is competitive because…",
+          "answers": [
+            "he always wants to finish first"
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "Lucy is creative because…",
+          "answers": [
+            "she loves inventing stories"
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "Harry is quiet because…",
+          "answers": [
+            "he prefers staying at home alone"
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "Tom is shy because…",
+          "answers": [
+            "he does not like speaking in front of the class"
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "Emma is helpful because…",
+          "answers": [
+            "she enjoys helping younger students"
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "Mia is curious because…",
+          "answers": [
+            "she asks lots of questions"
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "Ben is funny because…",
+          "answers": [
+            "he tells jokes"
+          ]
+        },
+        {
+          "id": "q9",
+          "prompt": "Olivia is talkative because…",
+          "answers": [
+            "she talks for hours"
+          ]
+        },
+        {
+          "id": "q10",
+          "prompt": "Leo is competitive because…",
+          "answers": [
+            "he hates losing"
+          ]
+        },
+        {
+          "id": "q11",
+          "prompt": "Lily is shy because…",
+          "answers": [
+            "she feels nervous with strangers"
+          ]
+        },
+        {
+          "id": "q12",
+          "prompt": "Noah is helpful because…",
+          "answers": [
+            "he helps his friends"
+          ]
+        },
+        {
+          "id": "q13",
+          "prompt": "Ava is creative because…",
+          "answers": [
+            "she draws her own characters"
+          ]
+        },
+        {
+          "id": "q14",
+          "prompt": "Max is sociable because…",
+          "answers": [
+            "he makes friends easily"
+          ]
+        },
+        {
+          "id": "q15",
+          "prompt": "Ella is quiet because…",
+          "answers": [
+            "she likes silence"
+          ]
+        },
+        {
+          "id": "q16",
+          "prompt": "Sam is curious because…",
+          "answers": [
+            "he wants to understand everything"
+          ]
+        },
+        {
+          "id": "q17",
+          "prompt": "Chloe is funny because…",
+          "answers": [
+            "she makes everyone laugh"
+          ]
+        },
+        {
+          "id": "q18",
+          "prompt": "Alex is talkative because…",
+          "answers": [
+            "he never stops speaking"
+          ]
+        },
+        {
+          "id": "q19",
+          "prompt": "Ruby is helpful because…",
+          "answers": [
+            "she explains homework"
+          ]
+        },
+        {
+          "id": "q20",
+          "prompt": "Oscar is creative because…",
+          "answers": [
+            "he writes stories"
+          ]
+        },
+        {
+          "id": "q21",
+          "prompt": "Grace is sociable because…",
+          "answers": [
+            "she enjoys parties"
+          ]
+        },
+        {
+          "id": "q22",
+          "prompt": "Ethan is competitive because…",
+          "answers": [
+            "he wants to win every game"
+          ]
+        },
+        {
+          "id": "q23",
+          "prompt": "Isla is quiet because…",
+          "answers": [
+            "she rarely speaks in class"
+          ]
+        },
+        {
+          "id": "q24",
+          "prompt": "Lucas is curious because…",
+          "answers": [
+            "he loves discovering new things"
+          ]
+        },
+        {
+          "id": "q25",
+          "prompt": "Zoe is shy because…",
+          "answers": [
+            "she avoids speaking in public"
+          ]
+        },
+        {
+          "id": "q26",
+          "prompt": "Hugo is funny because…",
+          "answers": [
+            "he loves telling jokes"
+          ]
+        },
+        {
+          "id": "q27",
+          "prompt": "Nina is helpful because…",
+          "answers": [
+            "she helps younger pupils"
+          ]
+        },
+        {
+          "id": "q28",
+          "prompt": "Adam is talkative because…",
+          "answers": [
+            "he loves long conversations"
+          ]
+        },
+        {
+          "id": "q29",
+          "prompt": "Rose is creative because…",
+          "answers": [
+            "she invents new games"
+          ]
+        },
+        {
+          "id": "q30",
+          "prompt": "Finn is competitive because…",
+          "answers": [
+            "he tries to be the best"
+          ]
+        }
+      ],
+      "count": 10,
+      "id": "ex2",
+      "mode": "matching",
+      "instructionFr": "Associe chaque début de phrase à une fin logique."
+    },
+    {
+      "title": "Exercise 3 — Translation",
+      "type": "text",
+      "instruction": "Translate into English. Several common formulations are accepted.",
+      "items": [
+        {
+          "id": "q1",
+          "prompt": "Je suis timide parce que je n’aime pas parler aux nouvelles personnes.",
+          "answers": [
+            "I am shy because I do not like talking to new people."
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "Mon frère est drôle parce qu’il aime raconter des blagues.",
+          "answers": [
+            "My brother is funny because he likes telling jokes."
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "Mes amis sont curieux parce qu’ils aiment découvrir de nouvelles choses.",
+          "answers": [
+            "My friends are curious because they like discovering new things."
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "Elle est serviable parce qu’elle aime aider les autres.",
+          "answers": [
+            "She is helpful because she likes helping others."
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "Tom est compétitif parce qu’il n’aime pas perdre.",
+          "answers": [
+            "Tom is competitive because he does not like losing."
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "Nous sommes sociables parce que nous aimons rencontrer de nouvelles personnes.",
+          "answers": [
+            "We are sociable because we like meeting new people."
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "Ma sœur n’est pas bavarde parce qu’elle n’aime pas parler en classe.",
+          "answers": [
+            "My sister is not talkative because she does not like talking in class."
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "Je suis créatif, mais mon meilleur ami est timide parce qu’il n’aime pas rencontrer de nouvelles personnes.",
+          "answers": [
+            "I am creative, but my best friend is shy because he does not like meeting new people."
+          ]
+        }
+      ],
+      "count": 8,
+      "mode": "translation",
+      "instructionFr": "Traduis en anglais. Une réponse non reconnue peut être une formulation correcte qui n’est pas encore prévue.",
+      "id": "ex3"
+    },
+    {
+      "title": "Exercise 4 — What are you like?",
+      "type": "writing",
+      "mode": "personality",
+      "instruction": "Write two sentences using BECAUSE: one about yourself and one about a classmate.",
+      "items": [
+        {
+          "id": "q1",
+          "prompt": "About me",
+          "subject": "me"
+        },
+        {
+          "id": "q2",
+          "prompt": "About a classmate",
+          "subject": "friend"
+        }
+      ],
+      "count": 2,
+      "id": "ex4",
+      "instructionFr": "Rédige des phrases complètes en respectant la consigne."
+    }
+  ]
+});

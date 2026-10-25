@@ -1,0 +1,6 @@
+{
+  "name": "english-practice-20262027",
+  "private": true,
+  "scripts": { "test": "node --test tests/*.test.cjs" },
+  "engines": { "node": ">=20" }
+}
