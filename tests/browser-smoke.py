@@ -1,19 +1,20 @@
 """Real Chromium checks on the same static files GitHub Pages will serve.
 
-Requests are fulfilled from the checkout to avoid external network dependencies.
+Files are served from the checkout over local HTTP, without external dependencies.
 The HTML, deferred scripts, CSS, origin and localStorage are exercised normally.
 """
 import json
+import http.server
 import mimetypes
 import os
 import re
 import shutil
+import threading
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[1]
-ORIGIN='https://english-practice.test/20262027/'
 manifest=json.loads((ROOT/'assets/lessons.json').read_text())
 screenshots=Path(os.environ.get('SITE_SCREENSHOTS','/tmp/english-practice-review'))
 screenshots.mkdir(parents=True,exist_ok=True)
@@ -22,25 +23,31 @@ def config(entry):
     source=(ROOT/entry['path']/entry['script']).read_text()
     return json.loads(source.split('window.EnglishPractice.mount(',1)[1].rsplit(');',1)[0])
 
-def route_files(route):
-    url=urlsplit(route.request.url)
-    relative=unquote(url.path).removeprefix('/20262027/')
-    if relative.endswith('/') or not relative:relative+='index.html'
-    target=(ROOT/relative).resolve()
-    if not target.is_relative_to(ROOT) or not target.is_file():
-        route.fulfill(status=404,body='Not found');return
-    # Reproduce a browser with the old, unversioned shared engine in its cache.
-    if relative=='assets/js/app.js' and not url.query:
-        route.fulfill(content_type='application/javascript',body='window.EnglishPractice={};');return
-    route.fulfill(status=200,content_type=mimetypes.guess_type(str(target))[0] or 'application/octet-stream',body=target.read_bytes())
+class SiteHandler(http.server.SimpleHTTPRequestHandler):
+    def translate_path(self,path):
+        relative=unquote(urlsplit(path).path).removeprefix('/20262027/').lstrip('/')
+        target=(ROOT/relative).resolve()
+        return str(target if target.is_relative_to(ROOT) else ROOT/'not-found')
+    def do_GET(self):
+        url=urlsplit(self.path)
+        # An unversioned request gets the former cached engine, reproducing the regression.
+        if url.path=='/20262027/assets/js/app.js' and not url.query:
+            data=b'window.EnglishPractice={};'
+            self.send_response(200);self.send_header('Content-Type','application/javascript')
+            self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
+        else:super().do_GET()
+    def log_message(self,*args):pass
+
+server=http.server.ThreadingHTTPServer(('127.0.0.1',0),SiteHandler)
+threading.Thread(target=server.serve_forever,daemon=True).start()
+ORIGIN='http://127.0.0.1:'+str(server.server_port)+'/20262027/'
 
 with sync_playwright() as p:
-    executable=os.environ.get('PLAYWRIGHT_CHROMIUM_EXECUTABLE') or shutil.which('chromium')
+    executable=os.environ.get('PLAYWRIGHT_CHROMIUM_EXECUTABLE') or (None if os.environ.get('CI') else shutil.which('chromium'))
     options={'headless':True,'args':['--no-sandbox','--disable-crashpad-for-testing']}
     if executable:options['executable_path']=executable
     browser=p.chromium.launch(**options)
     context=browser.new_context(viewport={'width':1440,'height':1000})
-    context.route('**/*',route_files)
     page=context.new_page()
     errors=[]
     page.on('pageerror',lambda error:errors.append(str(error)))
@@ -144,7 +151,6 @@ with sync_playwright() as p:
 
     # With scripts disabled the fifty exercise sections and prompts remain readable.
     reading=browser.new_context(java_script_enabled=False)
-    reading.route('**/*',route_files)
     reader=reading.new_page()
     for entry in manifest:
         reader.goto(ORIGIN+entry['path']+'/',wait_until='networkidle')
@@ -152,4 +158,5 @@ with sync_playwright() as p:
         assert reader.locator('.reading-questions li').count()>0
     assert not errors,errors
     browser.close()
+server.shutdown()
 print('PASS: 13 lessons, 50 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)
