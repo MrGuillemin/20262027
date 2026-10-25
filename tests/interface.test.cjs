@@ -94,3 +94,11 @@ test('chronology retains both its scenario and its two selected answers',()=>{
   assert.equal(returned.getElementById('ex4').querySelector('legend').textContent,prompt);
   assert.equal(returned.getElementById(fields[0].id).value,'2');assert.equal(returned.getElementById(fields[1].id).value,'middle');
 });
+test('one damaged exercise never hides the remaining exercises in the lesson',()=>{
+  const lesson=loadLesson(manifest[0]);delete lesson.exercises[0].items;
+  const {document}=open(lesson);
+  assert.equal(document.querySelectorAll('.exercise').length,lesson.exercises.length);
+  assert.equal(document.querySelectorAll('.exercise-error').length,1);
+  assert.ok(document.getElementById('ex2').querySelectorAll('input').length>0);
+  assert.ok(document.getElementById('ex3').querySelectorAll('input').length>0);
+});
