@@ -1,0 +1,119 @@
+[
+  {
+    "className": "5E4",
+    "unit": "unit1",
+    "letter": "a",
+    "path": "5E4/unit1/lesson-a",
+    "title": "Lesson A",
+    "description": "Physical description — BE, HAVE and adjectives",
+    "script": "lesson-a.js"
+  },
+  {
+    "className": "5E4",
+    "unit": "unit1",
+    "letter": "b",
+    "path": "5E4/unit1/lesson-b",
+    "title": "Lesson B",
+    "description": "BE / HAVE — Simple present — Meet Emma",
+    "script": "lesson-b.js"
+  },
+  {
+    "className": "5E4",
+    "unit": "unit1",
+    "letter": "c",
+    "path": "5E4/unit1/lesson-c",
+    "title": "Lesson C",
+    "description": "Personality adjectives and BECAUSE",
+    "script": "lesson-c.js"
+  },
+  {
+    "className": "4E2",
+    "unit": "unit1",
+    "letter": "a",
+    "path": "4E2/unit1/lesson-a",
+    "title": "Lesson A",
+    "description": "THERE IS / ARE — CAN — NEED — Connectors",
+    "script": "lesson.js"
+  },
+  {
+    "className": "4E2",
+    "unit": "unit1",
+    "letter": "b",
+    "path": "4E2/unit1/lesson-b",
+    "title": "Lesson B",
+    "description": "Melbourne — Connectors — Quantities — THERE IS / THERE ARE",
+    "script": "lesson.js"
+  },
+  {
+    "className": "4E2",
+    "unit": "unit1",
+    "letter": "c",
+    "path": "4E2/unit1/lesson-c",
+    "title": "Lesson C",
+    "description": "Comparatives and superlatives",
+    "script": "lesson.js"
+  },
+  {
+    "className": "4E3",
+    "unit": "Unit1",
+    "letter": "a",
+    "path": "4E3/Unit1/LessonA",
+    "title": "Lesson A",
+    "description": "THERE IS / ARE — CAN — Connectors",
+    "script": "lesson.js"
+  },
+  {
+    "className": "4E3",
+    "unit": "Unit1",
+    "letter": "b",
+    "path": "4E3/Unit1/LessonB",
+    "title": "Lesson B",
+    "description": "Melbourne — Connectors — Quantities — THERE IS / THERE ARE",
+    "script": "lesson.js"
+  },
+  {
+    "className": "4E3",
+    "unit": "Unit1",
+    "letter": "c",
+    "path": "4E3/Unit1/LessonC",
+    "title": "Lesson C",
+    "description": "Comparatives and superlatives",
+    "script": "lesson.js"
+  },
+  {
+    "className": "3E2",
+    "unit": "unit1",
+    "letter": "a",
+    "path": "3E2/unit1/lessonA",
+    "title": "Lesson A",
+    "description": "Road trip — BE — Plans — Wishes — Chronology",
+    "script": "lesson.js"
+  },
+  {
+    "className": "3E2",
+    "unit": "unit1",
+    "letter": "b",
+    "path": "3E2/unit1/lessonB",
+    "title": "Lesson B",
+    "description": "The road trip is over! — Past simple — Time markers",
+    "script": "lesson.js"
+  },
+  {
+    "className": "3E4",
+    "unit": "unit1",
+    "letter": "a",
+    "path": "3E4/unit1/lessonA",
+    "title": "Lesson A",
+    "description": "Road trip — BE — Plans — Wishes — Chronology",
+    "script": "lesson.js"
+  },
+  {
+    "className": "3E4",
+    "unit": "unit1",
+    "letter": "b",
+    "path": "3E4/unit1/lessonB",
+    "title": "Lesson B",
+    "description": "The road trip is over! — Past simple — Time markers",
+    "script": "lesson.js"
+  }
+]
