@@ -20,10 +20,24 @@ test('all twenty-four pages and their links resolve under both the production an
 });
 test('every lesson has breadcrumbs and links to every sibling, with the active lesson marked',()=>{
   for(const entry of manifest){const source=fs.readFileSync(path.join(root,entry.path,'index.html'),'utf8');
-    assert.match(source,/href="\.\.\/\.\.\/\.\.\/">All classes/);assert.match(source,/href="\.\.\/\.\.\/">/);assert.match(source,/href="\.\.\/">Unit 1/);
+    assert.match(source,/href="\.\.\/\.\.\/\.\.\/">Toutes les classes/);assert.match(source,/href="\.\.\/\.\.\/">/);assert.match(source,/href="\.\.\/">Unit 1/);
     for(const sibling of manifest.filter(other=>other.className===entry.className))assert.ok(source.includes('href="../'+sibling.path.split('/').at(-1)+'/"'));
     assert.ok(source.includes('href="../'+entry.path.split('/').at(-1)+'/" aria-current="page"'));
-    assert.ok(source.includes('src="'+entry.script+'"'));
+    assert.ok(source.includes('src="'+entry.script+'?v='));
+  }
+});
+test('every generated page has fresh asset versions and readable exercises if scripts fail',()=>{
+  const crypto=require('node:crypto');
+  const hash=file=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex').slice(0,12);
+  for(const entry of manifest){const source=fs.readFileSync(path.join(root,entry.path,'index.html'),'utf8');
+    const lesson=loadLesson(entry);
+    assert.equal((source.match(/class="exercise fallback-exercise"/g)||[]).length,lesson.exercises.length);
+    assert.match(source,/assets\/js\/app.js\?v=[a-f0-9]{12}/);
+    assert.match(source,/assets\/css\/style.css\?v=[a-f0-9]{12}/);
+    assert.ok(source.includes('assets/js/app.js?v='+hash('assets/js/app.js')));
+    assert.ok(source.includes('assets/css/style.css?v='+hash('assets/css/style.css')));
+    assert.ok(source.includes(entry.script+'?v='+hash(entry.path+'/'+entry.script)));
+    for(const exercise of lesson.exercises)assert.ok(source.includes('id="'+exercise.id+'"'));
   }
 });
 test('shared and class-specific JavaScript is syntactically valid',()=>{

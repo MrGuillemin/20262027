@@ -222,7 +222,18 @@
       if(exercise.challenge)section.append(render(exercise.challenge,false,true));
       return section;
     }
-    host.replaceChildren(...lesson.exercises.map(exercise=>render(exercise)));
+    // Keep other exercises visible if one bank or saved answer cannot be rendered.
+    host.replaceChildren();
+    lesson.exercises.forEach(exercise=>{
+      try{host.append(render(exercise));}
+      catch(error){
+        console.error('Exercise rendering failed:',lesson.id,exercise.id,error);
+        const panel=node('section',undefined,'exercise exercise-error');panel.id=exercise.id;
+        panel.append(node('h2',exercise.title),node('p','Cet exercice n’a pas pu se charger. Les autres exercices de la leçon restent disponibles.','notice'));
+        panel.append(button('Réessayer cet exercice',()=>{try{panel.replaceWith(render(exercise,true));}catch(retryError){console.error(retryError);}},'secondary'));
+        host.append(panel);
+      }
+    });
   }
   return {normalize,canonical,matchAnswer,shuffle,uniqueItems,createProgress,diagnose,writingAdvice,mount};
 });
