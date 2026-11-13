@@ -115,5 +115,18 @@
     "title": "Lesson B",
     "description": "The road trip is over! — Past simple — Time markers",
     "script": "lesson.js"
+  },
+  {
+    "className": "3E4",
+    "unit": "unit2",
+    "letter": "a",
+    "path": "3E4/unit2/lessonA",
+    "title": "Lesson A",
+    "description": "Making Pocket Money — TO + BV · BY + V-ING · WANT TO + BV",
+    "script": "lesson.js",
+    "engine": "PocketMoney",
+    "engineScript": "practice.js",
+    "bank": "questions.json",
+    "unitTitle": "Making Pocket Money"
   }
 ]
