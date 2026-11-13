@@ -2,10 +2,10 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const {manifest,loadLesson}=require('./helpers.cjs');
 const {matchAnswer,uniqueItems}=require('../assets/js/app.js');
-test('the five classes retain thirteen lessons and fifty main exercises',()=>{
+test('the five classes retain the original lessons plus Making Pocket Money',()=>{
   assert.deepEqual([...new Set(manifest.map(entry=>entry.className))].sort(),['3E2','3E4','4E2','4E3','5E4']);
-  assert.equal(manifest.length,13);assert.equal(new Set(manifest.map(entry=>entry.path)).size,13);
-  assert.equal(manifest.flatMap(entry=>loadLesson(entry).exercises).length,50);
+  assert.equal(manifest.length,14);assert.equal(new Set(manifest.map(entry=>entry.path)).size,14);
+  assert.equal(manifest.flatMap(entry=>loadLesson(entry).exercises).length,52);
 });
 test('banks contain unique questions, usable answers and valid choice options',()=>{
   for(const entry of manifest){const lesson=loadLesson(entry);assert.equal(lesson.id,entry.path);

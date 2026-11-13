@@ -1,0 +1,498 @@
+[
+  {
+    "id": "ex1",
+    "title": "Exercise 1 — Complete the sentences",
+    "instruction": "Complete with TO + BV or BY + V-ING. Use the verb in brackets.",
+    "instructionFr": "Complète avec TO + BV ou BY + V-ING en utilisant le verbe entre parenthèses.",
+    "items": [
+      {
+        "id": "q1",
+        "prompt": "Jack works on weekends ______ (save) money.",
+        "answers": [
+          "to save"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q2",
+        "prompt": "Students can make pocket money ______ (sell) lemonade.",
+        "answers": [
+          "by selling"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q3",
+        "prompt": "She does odd jobs ______ (buy) a new phone.",
+        "answers": [
+          "to buy"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q4",
+        "prompt": "Teenagers can help their neighbours ______ (mow) lawns.",
+        "answers": [
+          "by mowing"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q5",
+        "prompt": "Anthony works after school ______ (earn) extra money.",
+        "answers": [
+          "to earn"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q6",
+        "prompt": "You can earn money ______ (look after) pets.",
+        "answers": [
+          "by looking after"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q7",
+        "prompt": "She sells old clothes ______ (buy) her first car.",
+        "answers": [
+          "to buy"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q8",
+        "prompt": "Teenagers can help elderly people ______ (do) their shopping.",
+        "answers": [
+          "by doing"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q9",
+        "prompt": "Lucy babysits on Saturdays ______ (save) money.",
+        "answers": [
+          "to save"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q10",
+        "prompt": "Teenagers can earn pocket money ______ (wash) cars.",
+        "answers": [
+          "by washing"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q11",
+        "prompt": "Tom works during the holidays ______ (pay) for his driving lessons.",
+        "answers": [
+          "to pay"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q12",
+        "prompt": "You can make money ______ (walk) dogs.",
+        "answers": [
+          "by walking"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q13",
+        "prompt": "Sarah wants a summer job ______ (become) more independent.",
+        "answers": [
+          "to become"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q14",
+        "prompt": "Students can earn extra money ______ (deliver) newspapers.",
+        "answers": [
+          "by delivering"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q15",
+        "prompt": "Jack helps his neighbours ______ (earn) pocket money.",
+        "answers": [
+          "to earn"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q16",
+        "prompt": "You can save money ______ (avoid) unnecessary purchases.",
+        "answers": [
+          "by avoiding"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q17",
+        "prompt": "Emma works in a café ______ (buy) a new laptop.",
+        "answers": [
+          "to buy"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q18",
+        "prompt": "Teenagers can help their parents ______ (clean) the house.",
+        "answers": [
+          "by cleaning"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q19",
+        "prompt": "Lucy sells cookies ______ (make) extra money.",
+        "answers": [
+          "to make"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q20",
+        "prompt": "You can earn money ______ (teach) younger children.",
+        "answers": [
+          "by teaching"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q21",
+        "prompt": "Anthony saves his pocket money ______ (travel) to California.",
+        "answers": [
+          "to travel"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q22",
+        "prompt": "Teenagers can make money ______ (sell) old video games.",
+        "answers": [
+          "by selling"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q23",
+        "prompt": "She works every weekend ______ (pay) for her holidays.",
+        "answers": [
+          "to pay"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q24",
+        "prompt": "You can help your neighbours ______ (water) their plants.",
+        "answers": [
+          "by watering"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q25",
+        "prompt": "Tom does odd jobs ______ (buy) new shoes.",
+        "answers": [
+          "to buy"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q26",
+        "prompt": "Teenagers can earn money ______ (take care of) animals.",
+        "answers": [
+          "by taking care of"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q27",
+        "prompt": "Emma works after school ______ (save) for a car.",
+        "answers": [
+          "to save"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q28",
+        "prompt": "Students can make pocket money ______ (help) elderly people.",
+        "answers": [
+          "by helping"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      },
+      {
+        "id": "q29",
+        "prompt": "Jack wants to find a job ______ (gain) experience.",
+        "answers": [
+          "to gain"
+        ],
+        "explanation": "TO + BV exprime le but."
+      },
+      {
+        "id": "q30",
+        "prompt": "You can earn extra money ______ (babysit) at weekends.",
+        "answers": [
+          "by babysitting"
+        ],
+        "explanation": "BY + V-ING exprime le moyen."
+      }
+    ]
+  },
+  {
+    "id": "ex2",
+    "title": "Exercise 2 — Translate into English",
+    "instruction": "Translate the following sentences. Use WANT TO + BV, TO + BV or BY + V-ING.",
+    "instructionFr": "Traduis les phrases en anglais en utilisant les structures étudiées.",
+    "items": [
+      {
+        "id": "q1",
+        "prompt": "Les adolescents peuvent gagner de l'argent en distribuant des journaux.",
+        "answers": [
+          "Teenagers can earn money by delivering newspapers."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q2",
+        "prompt": "Elle travaille dans un restaurant pour payer ses études.",
+        "answers": [
+          "She works in a restaurant to pay for her studies."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q3",
+        "prompt": "Il aide ses parents en nettoyant la maison.",
+        "answers": [
+          "He helps his parents by cleaning the house."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q4",
+        "prompt": "Certains jeunes économisent pour passer leur permis de conduire.",
+        "answers": [
+          "Some teenagers save money to get their driving licence."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q5",
+        "prompt": "On peut gagner de l'argent en donnant des cours particuliers.",
+        "answers": [
+          "You can earn money by giving private lessons."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q6",
+        "prompt": "Elle travaille pendant les vacances pour devenir plus indépendante.",
+        "answers": [
+          "She works during the holidays to become more independent."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q7",
+        "prompt": "Je veux travailler comme baby-sitter pour gagner un peu d'argent.",
+        "answers": [
+          "I want to work as a babysitter to earn some money."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q8",
+        "prompt": "Elle veut trouver un petit boulot en Californie pour devenir plus indépendante.",
+        "answers": [
+          "She wants to find a part-time job in California to become more independent."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q9",
+        "prompt": "Tom veut économiser pour acheter une voiture.",
+        "answers": [
+          "Tom wants to save money to buy a car."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q10",
+        "prompt": "Les adolescents peuvent gagner de l'argent en lavant des voitures.",
+        "answers": [
+          "Teenagers can earn money by washing cars."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q11",
+        "prompt": "Elle veut travailler dans un café.",
+        "answers": [
+          "She wants to work in a café."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q12",
+        "prompt": "Nous pouvons gagner de l'argent en vendant des biscuits.",
+        "answers": [
+          "We can earn money by selling cookies."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q13",
+        "prompt": "Il travaille le week-end pour acheter un nouveau téléphone.",
+        "answers": [
+          "He works at weekends to buy a new phone."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q14",
+        "prompt": "Je veux devenir plus indépendant.",
+        "answers": [
+          "I want to become more independent."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q15",
+        "prompt": "Lucy gagne de l'argent en promenant des chiens.",
+        "answers": [
+          "Lucy earns money by walking dogs."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q16",
+        "prompt": "Elle économise pour partir en vacances.",
+        "answers": [
+          "She saves money to go on holiday."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q17",
+        "prompt": "Les élèves peuvent gagner de l'argent en aidant leurs voisins.",
+        "answers": [
+          "Students can earn money by helping their neighbours."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q18",
+        "prompt": "Jack veut trouver un travail pendant les vacances.",
+        "answers": [
+          "Jack wants to find a job during the holidays."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q19",
+        "prompt": "Il travaille après les cours pour gagner de l'argent de poche.",
+        "answers": [
+          "He works after school to earn pocket money."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q20",
+        "prompt": "On peut économiser en achetant moins de vêtements.",
+        "answers": [
+          "You can save money by buying fewer clothes."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q21",
+        "prompt": "Sarah veut acheter une nouvelle paire de chaussures.",
+        "answers": [
+          "Sarah wants to buy a new pair of shoes."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q22",
+        "prompt": "Les adolescents peuvent gagner de l'argent en gardant des enfants.",
+        "answers": [
+          "Teenagers can earn money by babysitting."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q23",
+        "prompt": "Elle fait des petits boulots pour payer ses vacances.",
+        "answers": [
+          "She does odd jobs to pay for her holidays."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q24",
+        "prompt": "Il veut travailler pour gagner de l'expérience.",
+        "answers": [
+          "He wants to work to gain experience."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q25",
+        "prompt": "Nous pouvons aider nos parents en faisant le ménage.",
+        "answers": [
+          "We can help our parents by doing the housework."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q26",
+        "prompt": "Emma économise pour acheter un ordinateur.",
+        "answers": [
+          "Emma saves money to buy a computer."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q27",
+        "prompt": "Je veux trouver un petit boulot pour gagner de l'argent.",
+        "answers": [
+          "I want to find a part-time job to earn money."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q28",
+        "prompt": "On peut gagner de l'argent en vendant de vieux objets.",
+        "answers": [
+          "You can earn money by selling old things."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q29",
+        "prompt": "Elle veut travailler aux États-Unis pour améliorer son anglais.",
+        "answers": [
+          "She wants to work in the USA to improve her English."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      },
+      {
+        "id": "q30",
+        "prompt": "Il aide ses voisins en tondant leur pelouse.",
+        "answers": [
+          "He helps his neighbours by mowing their lawn."
+        ],
+        "explanation": "WANT TO + BV : volonté ; TO + BV : but ; BY + V-ING : moyen."
+      }
+    ]
+  }
+]

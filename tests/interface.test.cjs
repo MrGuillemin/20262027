@@ -6,6 +6,7 @@ const vm=require('node:vm');
 const {Document}=require('./dom.cjs');
 const {root,manifest,loadLesson,memoryStorage}=require('./helpers.cjs');
 const source=fs.readFileSync(path.join(root,'assets/js/app.js'),'utf8');
+const sharedManifest=manifest.filter(entry=>!entry.engine);
 function open(lesson,storage=memoryStorage()){
   const document=new Document(),window={localStorage:storage};
   vm.runInNewContext(source,{window,document});window.EnglishPractice.mount(lesson);
@@ -16,7 +17,7 @@ function action(section,text){return section.children.find(child=>child.classNam
 
 test('all thirteen lessons render their exercises with labelled fields and feedback descriptions',()=>{
   let exercises=0;
-  for(const entry of manifest){const lesson=loadLesson(entry),{document}=open(lesson);
+  for(const entry of sharedManifest){const lesson=loadLesson(entry),{document}=open(lesson);
     assert.equal(document.querySelectorAll('.exercise').length,lesson.exercises.length,entry.path);exercises+=lesson.exercises.length;
     const ids=document.querySelectorAll('[id]').map(node=>node.id);assert.equal(new Set(ids).size,ids.length,entry.path+' duplicate IDs');
     for(const field of document.querySelectorAll('input, select, textarea')){
@@ -27,7 +28,7 @@ test('all thirteen lessons render their exercises with labelled fields and feedb
   assert.equal(exercises,50);
 });
 test('a model answer can be checked in every closed exercise, including choices and chronology',()=>{
-  for(const entry of manifest){const lesson=loadLesson(entry),{document}=open(lesson);
+  for(const entry of sharedManifest){const lesson=loadLesson(entry),{document}=open(lesson);
     for(const exercise of lesson.exercises){if(['writing','free'].includes(exercise.type))continue;
       const section=document.getElementById(exercise.id);
       for(const row of section.children.filter(node=>node.className==='question')){

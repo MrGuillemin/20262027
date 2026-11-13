@@ -21,7 +21,7 @@ screenshots.mkdir(parents=True,exist_ok=True)
 
 def config(entry):
     source=(ROOT/entry['path']/entry['script']).read_text()
-    return json.loads(source.split('window.EnglishPractice.mount(',1)[1].rsplit(');',1)[0])
+    return json.loads(source.split('window.'+entry.get('engine','EnglishPractice')+'.mount(',1)[1].rsplit(');',1)[0])
 
 class SiteHandler(http.server.SimpleHTTPRequestHandler):
     def translate_path(self,path):
@@ -64,6 +64,7 @@ with sync_playwright() as p:
             page.add_style_tag(content=css)
             if entry:
                 page.evaluate(app)
+                if entry.get('engineScript'):page.evaluate((ROOT/entry['path']/entry['engineScript']).read_text())
                 page.evaluate((ROOT/entry['path']/entry['script']).read_text())
         for width in [1440,390]:
             page.set_viewport_size({'width':width,'height':1000 if width==1440 else 844})
@@ -75,7 +76,7 @@ with sync_playwright() as p:
                 assert page.locator('.exercise-error').count()==0
                 assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth+1'),entry['path']+' overflows'
                 total+=count
-            assert total==50
+            assert total==52
             display('index.html')
             assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth+1')
             suffix='desktop' if width==1440 else 'mobile'
@@ -88,7 +89,7 @@ with sync_playwright() as p:
             assert page.locator('.fallback-exercise').count()==len(config(entry)['exercises'])
         assert not errors,errors
         browser.close()
-        print('PASS render-only: 50 exercises at desktop and mobile widths; 13 readable fallbacks. Navigation not tested in this mode.')
+        print('PASS render-only: 52 exercises at desktop and mobile widths; 14 readable fallbacks. Navigation not tested in this mode.')
         raise SystemExit(0)
     total=0
     for entry in manifest:
@@ -102,13 +103,13 @@ with sync_playwright() as p:
         assert page.locator('.question input, .question select, .question textarea').count()>0
         total+=expected
         print(entry['path']+': '+str(expected)+' exercises visible',flush=True)
-    assert total==50,total
+    assert total==52,total
 
     # Go through each class and unit instead of only opening deep links.
     for code in ['5E4','4E2','4E3','3E2','3E4']:
         page.goto(ORIGIN,wait_until='networkidle')
         page.locator('.class-card[href="'+code+'/"]').click()
-        page.locator('.unit-card').click()
+        page.locator('.unit-card').first.click()
         page.locator('.lesson-card').first.click()
         page.wait_for_selector('.exercise:not(.fallback-exercise)')
         assert page.locator('.exercise-error').count()==0,code
@@ -159,4 +160,4 @@ with sync_playwright() as p:
     assert not errors,errors
     browser.close()
 server.shutdown()
-print('PASS: 13 lessons, 50 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)
+print('PASS: 14 lessons, 52 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)

@@ -5,8 +5,8 @@ const path=require('node:path');
 const vm=require('node:vm');
 const {root,manifest,loadLesson,walk}=require('./helpers.cjs');
 const html=walk(root).filter(file=>file.endsWith('.html'));
-test('all twenty-four pages and their links resolve under both the production and a preview prefix',()=>{
-  assert.equal(html.length,24);
+test('all twenty-six pages and their links resolve under both the production and a preview prefix',()=>{
+  assert.equal(html.length,26);
   for(const prefix of ['/20262027/','/preview/'])for(const file of html){const relative=path.relative(root,file).split(path.sep).join('/'),source=fs.readFileSync(file,'utf8');
     for(const match of source.matchAll(/(?:href|src)=["']([^"']+)["']/g)){
       const reference=match[1];assert.ok(!reference.startsWith('/'),relative+' hardcoded root URL');
@@ -20,8 +20,8 @@ test('all twenty-four pages and their links resolve under both the production an
 });
 test('every lesson has breadcrumbs and links to every sibling, with the active lesson marked',()=>{
   for(const entry of manifest){const source=fs.readFileSync(path.join(root,entry.path,'index.html'),'utf8');
-    assert.match(source,/href="\.\.\/\.\.\/\.\.\/">Toutes les classes/);assert.match(source,/href="\.\.\/\.\.\/">/);assert.match(source,/href="\.\.\/">Unit 1/);
-    for(const sibling of manifest.filter(other=>other.className===entry.className))assert.ok(source.includes('href="../'+sibling.path.split('/').at(-1)+'/"'));
+    assert.match(source,/href="\.\.\/\.\.\/\.\.\/">Toutes les classes/);assert.match(source,/href="\.\.\/\.\.\/">/);assert.ok(source.includes('href="../">Unit '+Number(entry.unit.match(/\d+/)[0])));
+    for(const sibling of manifest.filter(other=>other.className===entry.className&&other.unit===entry.unit))assert.ok(source.includes('href="../'+sibling.path.split('/').at(-1)+'/"'));
     assert.ok(source.includes('href="../'+entry.path.split('/').at(-1)+'/" aria-current="page"'));
     assert.ok(source.includes('src="'+entry.script+'?v='));
   }
