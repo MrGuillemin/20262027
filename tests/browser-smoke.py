@@ -76,7 +76,7 @@ with sync_playwright() as p:
                 assert page.locator('.exercise-error').count()==0
                 assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth+1'),entry['path']+' overflows'
                 total+=count
-            assert total==52
+            assert total==54
             display('index.html')
             assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth+1')
             suffix='desktop' if width==1440 else 'mobile'
@@ -89,7 +89,7 @@ with sync_playwright() as p:
             assert page.locator('.fallback-exercise').count()==len(config(entry)['exercises'])
         assert not errors,errors
         browser.close()
-        print('PASS render-only: 52 exercises at desktop and mobile widths; 14 readable fallbacks. Navigation not tested in this mode.')
+        print('PASS render-only: 54 exercises at desktop and mobile widths; 16 readable fallbacks. Navigation not tested in this mode.')
         raise SystemExit(0)
     total=0
     for entry in manifest:
@@ -103,7 +103,7 @@ with sync_playwright() as p:
         assert page.locator('.question input, .question select, .question textarea').count()>0
         total+=expected
         print(entry['path']+': '+str(expected)+' exercises visible',flush=True)
-    assert total==52,total
+    assert total==54,total
 
     # Go through each class and unit instead of only opening deep links.
     for code in ['5E4','4E2','4E3','3E2','3E4']:
@@ -134,6 +134,47 @@ with sync_playwright() as p:
         page.locator('#ex1 > .actions').get_by_role('button',name='Try again',exact=True).click()
         assert page.locator('#'+other_id).input_value()==other_value,code+' reset another exercise'
 
+    # Navigate to both new Unit 2 lessons, then check wrong and correct choices.
+    for entry in [entry for entry in manifest if entry.get('engine')=='AussieRules']:
+        page.goto(ORIGIN,wait_until='networkidle')
+        page.locator('.class-card[href="'+entry['className']+'/"]').click()
+        page.locator('.unit-card[href="'+entry['unit']+'/"]').click()
+        page.locator('.lesson-card').click()
+        page.wait_for_selector('#ex1 select')
+        bank={q['id']:q for q in config(entry)['exercises'][0]['items']}
+        orders=set();seen=set();choice_orders=set()
+        for attempt in range(10):
+            section=page.locator('#ex1');fields=section.locator('select')
+            ids=fields.evaluate_all('(nodes)=>nodes.map(n=>n.id)')
+            assert len(ids)==10 and len(set(ids))==10
+            orders.add(tuple(ids))
+            assert all(v=='' for v in fields.evaluate_all('(nodes)=>nodes.map(n=>n.value)'))
+            assert all(t=='' for t in section.locator('.feedback').all_text_contents())
+            for field_id in ids:
+                qid=field_id.split('-')[1];seen.add(qid);item=bank[qid]
+                field=page.locator('#'+field_id)
+                options=field.locator('option').evaluate_all('(nodes)=>nodes.map(n=>n.value).filter(Boolean)')
+                assert sorted(options)==sorted(item['choices'])
+                choice_orders.add(tuple(options))
+                field.select_option(next(c for c in options if c!=item['answers'][0]))
+            section.get_by_role('button',name='Check answers',exact=True).click()
+            assert section.locator('.score').inner_text().startswith('0 / 10')
+            for field_id in ids:
+                item=bank[field_id.split('-')[1]]
+                feedback=page.locator('#'+field_id+'-feedback').inner_text()
+                assert 'Réponse attendue : '+item['answers'][0] in feedback
+                assert item['explanation'] in feedback
+                page.locator('#'+field_id).select_option(item['answers'][0])
+            section.get_by_role('button',name='Check answers',exact=True).click()
+            assert section.locator('.score').inner_text().startswith('10 / 10')
+            assert all(t.startswith('✓ Correct !') for t in section.locator('.feedback').all_text_contents())
+            section.get_by_role('button',name='Try again',exact=True).click()
+            assert page.locator('#ex1-score').inner_text().startswith('0 / 10')
+        assert len(orders)==10 and len(choice_orders)>10
+        assert any(int(qid[1:])>10 for qid in seen)
+        page.screenshot(path=str(screenshots/(entry['className']+'-aussie-rules.png')),full_page=True)
+        print(entry['path']+': PASS 10 retries; choice shuffle, check, correction and reset',flush=True)
+
     # Small viewports: no horizontal page overflow, and controls stay available.
     page.set_viewport_size({'width':390,'height':844})
     for entry in manifest:
@@ -160,4 +201,4 @@ with sync_playwright() as p:
     assert not errors,errors
     browser.close()
 server.shutdown()
-print('PASS: 14 lessons, 52 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)
+print('PASS: 16 lessons, 54 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)
