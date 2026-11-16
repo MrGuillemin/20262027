@@ -128,5 +128,33 @@
     "engineScript": "practice.js",
     "bank": "questions.json",
     "unitTitle": "Making Pocket Money"
+  },
+  {
+    "className": "4E2",
+    "unit": "unit2",
+    "letter": "b",
+    "path": "4E2/unit2/lesson-b",
+    "title": "Lesson B",
+    "description": "Aussie Rules — CAN / CAN’T / MUST / MUSTN’T / HAVE TO",
+    "script": "lesson.js",
+    "engine": "AussieRules",
+    "engineScript": "../../../assets/js/modals.js",
+    "bank": "questions.json",
+    "unitTitle": "Aussie Rules",
+    "notice": "Choisis le modal qui correspond au contexte. En cas d’erreur, le correcteur affiche la réponse attendue et une explication. Try again recommence uniquement cet exercice."
+  },
+  {
+    "className": "4E3",
+    "unit": "Unit2",
+    "letter": "b",
+    "path": "4E3/Unit2/LessonB",
+    "title": "Lesson B",
+    "description": "Aussie Rules — CAN / CAN’T / MUST / MUSTN’T / HAVE TO",
+    "script": "lesson.js",
+    "engine": "AussieRules",
+    "engineScript": "../../../assets/js/modals.js",
+    "bank": "questions.json",
+    "unitTitle": "Aussie Rules",
+    "notice": "Choisis le modal qui correspond au contexte. En cas d’erreur, le correcteur affiche la réponse attendue et une explication. Try again recommence uniquement cet exercice."
   }
 ]
