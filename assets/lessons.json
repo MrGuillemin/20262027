@@ -170,5 +170,19 @@
     "bank": "questions.json",
     "unitTitle": "Telling the time",
     "notice": "En anglais : past = après l’heure, to = avant l’heure suivante. Chaque tentative propose 10 questions parmi 30. Try again recommence uniquement l’exercice concerné."
+  },
+  {
+    "className": "3E2",
+    "unit": "unit2",
+    "letter": "a",
+    "path": "3E2/unit2/lessonA",
+    "title": "Lesson A",
+    "description": "Making Pocket Money — TO + BV · BY + V-ING · WANT TO + BV",
+    "script": "lesson.js",
+    "engine": "PocketMoney3E2",
+    "engineScript": "practice.js",
+    "bank": "questions.json",
+    "unitTitle": "Making Pocket Money",
+    "notice": "TO + BV : but · BY + V-ING : moyen · WANT TO + BV : volonté. Les réponses restent dans la page jusqu’au recommencement. Elles ne sont pas sauvegardées après rechargement."
   }
 ]

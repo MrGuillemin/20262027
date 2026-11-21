@@ -76,7 +76,7 @@ with sync_playwright() as p:
                 assert page.locator('.exercise-error').count()==0
                 assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth+1'),entry['path']+' overflows'
                 total+=count
-            assert total==56
+            assert total==58
             display('index.html')
             assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth+1')
             suffix='desktop' if width==1440 else 'mobile'
@@ -89,7 +89,7 @@ with sync_playwright() as p:
             assert page.locator('.fallback-exercise').count()==len(config(entry)['exercises'])
         assert not errors,errors
         browser.close()
-        print('PASS render-only: 56 exercises at desktop and mobile widths; 17 readable fallbacks. Navigation not tested in this mode.')
+        print('PASS render-only: 58 exercises at desktop and mobile widths; 18 readable fallbacks. Navigation not tested in this mode.')
         raise SystemExit(0)
     total=0
     for entry in manifest:
@@ -103,7 +103,7 @@ with sync_playwright() as p:
         assert page.locator('.question input, .question select, .question textarea').count()>0
         total+=expected
         print(entry['path']+': '+str(expected)+' exercises visible',flush=True)
-    assert total==56,total
+    assert total==58,total
 
     # Go through each class and unit instead of only opening deep links.
     for code in ['5E4','4E2','4E3','3E2','3E4']:
@@ -220,6 +220,56 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':1440,'height':1000})
     print('5E4 Telling the time: PASS navigation, 10 retries per exercise, variants, corrections, scores, reload, desktop and mobile.',flush=True)
 
+    # 3E2-specific banks and correction, independent of 3E4.
+    money_entry=next(entry for entry in manifest if entry.get('engine')=='PocketMoney3E2')
+    page.goto(ORIGIN,wait_until='networkidle')
+    page.locator('.class-card[href="3E2/"]').click()
+    page.locator('.unit-card[href="unit2/"]').click()
+    page.locator('.lesson-card').click()
+    page.wait_for_selector('#ex1 input')
+    for width in [1440,768,390]:
+        page.set_viewport_size({'width':width,'height':1000 if width==1440 else 844})
+        assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+        assert 'undefined' not in page.locator('body').inner_text()
+        for index,exercise in enumerate(config(money_entry)['exercises']):
+            bank={q['id']:q for q in exercise['items']}
+            orders=set();seen=set()
+            for attempt in range(10 if width==1440 else 1):
+                section=page.locator('#'+exercise['id']);fields=section.locator('input')
+                ids=fields.evaluate_all('(nodes)=>nodes.map(n=>n.id)')
+                assert len(ids)==10 and len(set(ids))==10
+                orders.add(tuple(ids));seen.update(field_id.split('-')[1] for field_id in ids)
+                assert all(v=='' for v in fields.evaluate_all('(nodes)=>nodes.map(n=>n.value)'))
+                assert all(t=='' for t in section.locator('.feedback').all_text_contents())
+                if index==1:assert section.get_by_role('button',name='Show a possible answer').first.is_disabled()
+                for field_id in ids:page.locator('#'+field_id).fill('by sell' if index==0 else 'She want to work')
+                if index==1:assert section.get_by_role('button',name='Show a possible answer').first.is_disabled()
+                section.get_by_role('button',name='Check answers',exact=True).click()
+                assert section.locator('.score').inner_text().startswith('0 / 10 validées · 10 erreur')
+                if index==1:
+                    section.get_by_role('button',name='Show a possible answer').first.click()
+                    assert bank[ids[0].split('-')[1]]['answers'][0] in section.locator('.model').first.inner_text()
+                for field_id in ids:
+                    answer=bank[field_id.split('-')[1]]['answers'][0]
+                    if index==0:answer=answer.upper().replace(' ','   ')
+                    else:answer=answer.replace('Teenagers','Young people').replace('earn money','make money').replace('USA','United States').replace('by babysitting','by looking after children')
+                    page.locator('#'+field_id).fill(answer)
+                section.get_by_role('button',name='Check answers',exact=True).click()
+                assert section.locator('.score').inner_text().startswith('10 / 10 validées')
+                if index==1:
+                    first=page.locator('#'+ids[0]);first.fill('An alternative formulation to compare')
+                    section.get_by_role('button',name='Check answers',exact=True).click()
+                    assert '1 à comparer' in section.locator('.score').inner_text()
+                    assert 'Réponse à comparer avec la proposition.' in page.locator('#'+ids[0]+'-feedback').inner_text()
+                section.get_by_role('button',name='Try again',exact=True).click()
+                assert page.locator('#'+exercise['id']+'-score').inner_text().startswith('0 / 10 validées · 0 erreur')
+                assert all(t=='' for t in page.locator('#'+exercise['id']+' .model').all_text_contents())
+            if width==1440:
+                assert len(orders)==10 and any(int(qid[1:])>=21 for qid in seen)
+        page.screenshot(path=str(screenshots/('3e2-pocket-money-'+str(width)+'.png')),full_page=True)
+    page.set_viewport_size({'width':1440,'height':1000})
+    print('3E2 Making Pocket Money: PASS navigation, 10 retries per exercise, late questions, variants, errors, compare score, model gating, desktop/tablet/mobile.',flush=True)
+
     # Small viewports: no horizontal page overflow, and controls stay available.
     page.set_viewport_size({'width':390,'height':844})
     for entry in manifest:
@@ -246,4 +296,4 @@ with sync_playwright() as p:
     assert not errors,errors
     browser.close()
 server.shutdown()
-print('PASS: 17 lessons, 56 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)
+print('PASS: 18 lessons, 58 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)
