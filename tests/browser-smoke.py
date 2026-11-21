@@ -76,7 +76,7 @@ with sync_playwright() as p:
                 assert page.locator('.exercise-error').count()==0
                 assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth+1'),entry['path']+' overflows'
                 total+=count
-            assert total==54
+            assert total==56
             display('index.html')
             assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth+1')
             suffix='desktop' if width==1440 else 'mobile'
@@ -89,7 +89,7 @@ with sync_playwright() as p:
             assert page.locator('.fallback-exercise').count()==len(config(entry)['exercises'])
         assert not errors,errors
         browser.close()
-        print('PASS render-only: 54 exercises at desktop and mobile widths; 16 readable fallbacks. Navigation not tested in this mode.')
+        print('PASS render-only: 56 exercises at desktop and mobile widths; 17 readable fallbacks. Navigation not tested in this mode.')
         raise SystemExit(0)
     total=0
     for entry in manifest:
@@ -103,7 +103,7 @@ with sync_playwright() as p:
         assert page.locator('.question input, .question select, .question textarea').count()>0
         total+=expected
         print(entry['path']+': '+str(expected)+' exercises visible',flush=True)
-    assert total==54,total
+    assert total==56,total
 
     # Go through each class and unit instead of only opening deep links.
     for code in ['5E4','4E2','4E3','3E2','3E4']:
@@ -175,6 +175,51 @@ with sync_playwright() as p:
         page.screenshot(path=str(screenshots/(entry['className']+'-aussie-rules.png')),full_page=True)
         print(entry['path']+': PASS 10 retries; choice shuffle, check, correction and reset',flush=True)
 
+    # Telling the time: real navigation, variants, corrections and scoped retries.
+    time_entry=next(entry for entry in manifest if entry.get('engine')=='TimePractice')
+    page.goto(ORIGIN,wait_until='networkidle')
+    page.locator('.class-card[href="5E4/"]').click()
+    page.locator('.unit-card[href="unit2/"]').click()
+    page.locator('.lesson-card').click()
+    page.wait_for_selector('#ex1 input')
+    for width in [1440,390]:
+        page.set_viewport_size({'width':width,'height':1000 if width==1440 else 844})
+        assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+        for exercise in config(time_entry)['exercises']:
+            bank={q['id']:q for q in exercise['items']}
+            orders=set();seen=set()
+            for attempt in range(10 if width==1440 else 1):
+                section=page.locator('#'+exercise['id']);fields=section.locator('input')
+                ids=fields.evaluate_all('(nodes)=>nodes.map(n=>n.id)')
+                assert len(ids)==10 and len(set(ids))==10
+                orders.add(tuple(ids));seen.update(field_id.split('-')[1] for field_id in ids)
+                assert all(v=='' for v in fields.evaluate_all('(nodes)=>nodes.map(n=>n.value)'))
+                assert all(t=='' for t in section.locator('.feedback').all_text_contents())
+                for field_id in ids:page.locator('#'+field_id).fill('25:99')
+                section.get_by_role('button',name='Check answers',exact=True).click()
+                assert section.locator('.score').inner_text().startswith('0 / 10')
+                for field_id in ids:
+                    q=bank[field_id.split('-')[1]]
+                    feedback=page.locator('#'+field_id+'-feedback').inner_text()
+                    assert q['answers'][0] in feedback and q['explanation'] in feedback
+                    answer=q['answers'][0]
+                    if exercise['mode']=='timeWords':answer=answer.replace("It's ",'').replace('quarter','a quarter').upper().replace('-',' ')
+                    else:answer=answer.zfill(5) if attempt%2 else answer.replace(':','h')
+                    page.locator('#'+field_id).fill(answer)
+                section.get_by_role('button',name='Check answers',exact=True).click()
+                assert section.locator('.score').inner_text().startswith('10 / 10')
+                if width==1440 and attempt==0:
+                    page.reload(wait_until='networkidle')
+                    assert page.locator('#'+exercise['id']+'-score').inner_text().startswith('10 / 10')
+                section.get_by_role('button',name='Try again',exact=True).click()
+                assert page.locator('#'+exercise['id']+'-score').inner_text().startswith('0 / 10')
+            if width==1440:
+                assert len(orders)==10
+                assert any(int(qid[1:])>10 for qid in seen)
+        page.screenshot(path=str(screenshots/('telling-time-'+str(width)+'.png')),full_page=True)
+    page.set_viewport_size({'width':1440,'height':1000})
+    print('5E4 Telling the time: PASS navigation, 10 retries per exercise, variants, corrections, scores, reload, desktop and mobile.',flush=True)
+
     # Small viewports: no horizontal page overflow, and controls stay available.
     page.set_viewport_size({'width':390,'height':844})
     for entry in manifest:
@@ -201,4 +246,4 @@ with sync_playwright() as p:
     assert not errors,errors
     browser.close()
 server.shutdown()
-print('PASS: 16 lessons, 54 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)
+print('PASS: 17 lessons, 56 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)
