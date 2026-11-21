@@ -156,5 +156,19 @@
     "bank": "questions.json",
     "unitTitle": "Aussie Rules",
     "notice": "Choisis le modal qui correspond au contexte. En cas d’erreur, le correcteur affiche la réponse attendue et une explication. Try again recommence uniquement cet exercice."
+  },
+  {
+    "className": "5E4",
+    "unit": "unit2",
+    "letter": "a",
+    "path": "5E4/unit2/lesson-a",
+    "title": "Lesson A",
+    "description": "Telling the time — PAST / TO / QUARTER / HALF / O’CLOCK",
+    "script": "lesson.js",
+    "engine": "TimePractice",
+    "engineScript": "practice.js",
+    "bank": "questions.json",
+    "unitTitle": "Telling the time",
+    "notice": "En anglais : past = après l’heure, to = avant l’heure suivante. Chaque tentative propose 10 questions parmi 30. Try again recommence uniquement l’exercice concerné."
   }
 ]
