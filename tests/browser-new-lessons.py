@@ -85,7 +85,7 @@ with sync_playwright() as p:
                         else:assert 'base verbale' in row.locator('.feedback').inner_text()
                         row.get_by_role('button',name='Show a possible answer',exact=True).click();assert item['answers'][0] in row.locator('.model').inner_text()
                         answer(row,exercise,item);row.get_by_role('button',name='Check answer',exact=True).click();assert section.locator('.score').inner_text().startswith('10 / 10')
-                        row.locator('input').fill('A different formulation for comparison.');row.get_by_role('button',name='Check answer',exact=True).click()
+                        row.locator('input').fill(item.get('person','I')+' gained experience in this position.');row.get_by_role('button',name='Check answer',exact=True).click()
                         assert '1 réponse(s) à comparer' in section.locator('.score').inner_text();assert item['answers'][0] in row.locator('.model').inner_text()
                 section.get_by_role('button',name='Try again',exact=True).click()
                 assert all(t=='' for t in page.locator('#'+exercise['id']+' .model').all_text_contents())

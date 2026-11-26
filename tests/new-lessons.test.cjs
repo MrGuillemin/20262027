@@ -47,6 +47,7 @@ test('two different intensifications yield a point, one or duplicates yield half
  assert.equal(footy.grade(['Footy is very excitingly.',''],exciting,'feelings').points,0);
  assert.equal(footy.grade(['The atmosphere at the stadium is very amazing.',''],amazing,'feelings').points,0);
  assert.equal(footy.grade(['Footy is very exciting.','Footy is so exciting.'],exciting,'feelings').points,1);
+ assert.equal(footy.grade(['The atmosphere at the stadium is so amazing.','The atmosphere at the stadium is absolutely amazing.'],amazing,'feelings').points,1);
 });
 test('past notes accept coordination/spelling variants; errors report each verb separately',()=>{
  const notes=lessonJob.exercises[1].items;
@@ -57,6 +58,7 @@ test('past notes accept coordination/spelling variants; errors report each verb 
  assert.equal(job.grade('Emma read stories, played games and prepared snacks.',notes[24],'pastNotes').points,1);
  assert.equal(job.grade('Ben took on new responsibilities, learned new skills and became more independent.',notes[29],'pastNotes').points,1);
  assert.notEqual(job.grade('Sophia took served cleaned orders food tables.',sophia,'pastNotes').points,1);
+ assert.equal(job.grade('Sophia gained experience in this position.',sophia,'pastNotes').status,'compare');
 });
 test('translation accepts targeted variants and identifies past-tense errors without penalizing unknown formulations',()=>{
  const bank=lessonJob.exercises[2].items;

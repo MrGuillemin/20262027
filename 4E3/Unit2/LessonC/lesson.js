@@ -985,7 +985,8 @@ window.FootyPractice.mount({
           "prompt": "The atmosphere at the stadium is amazing.",
           "answers": [
             "The atmosphere at the stadium is really amazing.",
-            "The atmosphere at the stadium is absolutely amazing."
+            "The atmosphere at the stadium is absolutely amazing.",
+            "The atmosphere at the stadium is so amazing."
           ],
           "subject": "The atmosphere at the stadium",
           "verb": "is",
@@ -1159,7 +1160,8 @@ window.FootyPractice.mount({
           "prompt": "The atmosphere is fantastic.",
           "answers": [
             "The atmosphere is really fantastic.",
-            "The atmosphere is absolutely fantastic."
+            "The atmosphere is absolutely fantastic.",
+            "The atmosphere is so fantastic."
           ],
           "subject": "The atmosphere",
           "verb": "is",
@@ -1321,7 +1323,8 @@ window.FootyPractice.mount({
           "prompt": "The victory is amazing.",
           "answers": [
             "The victory is really amazing.",
-            "The victory is absolutely amazing."
+            "The victory is absolutely amazing.",
+            "The victory is so amazing."
           ],
           "subject": "The victory",
           "verb": "is",
