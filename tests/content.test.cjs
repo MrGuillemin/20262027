@@ -4,8 +4,8 @@ const {manifest,loadLesson}=require('./helpers.cjs');
 const {matchAnswer,uniqueItems}=require('../assets/js/app.js');
 test('the five classes retain the original lessons plus Making Pocket Money Aussie Rules and Telling the time and 3E2 Making Pocket Money',()=>{
   assert.deepEqual([...new Set(manifest.map(entry=>entry.className))].sort(),['3E2','3E4','4E2','4E3','5E4']);
-  assert.equal(manifest.length,18);assert.equal(new Set(manifest.map(entry=>entry.path)).size,18);
-  assert.equal(manifest.flatMap(entry=>loadLesson(entry).exercises).length,58);
+  assert.equal(manifest.length,22);assert.equal(new Set(manifest.map(entry=>entry.path)).size,22);
+  assert.equal(manifest.flatMap(entry=>loadLesson(entry).exercises).length,70);
 });
 test('banks contain unique questions, usable answers and valid choice options',()=>{
   for(const entry of manifest){const lesson=loadLesson(entry);assert.equal(lesson.id,entry.path);

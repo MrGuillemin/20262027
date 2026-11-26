@@ -1,0 +1,1512 @@
+/* Generated from questions.json by scripts/build-pages.cjs. */
+window.FirstJobPractice.mount({
+  "id": "3E4/unit2/lessonB",
+  "exercises": [
+    {
+      "id": "ex1",
+      "type": "choice",
+      "mode": "ed",
+      "count": 10,
+      "title": "Exercise 1 — Pronunciation: the -ED ending",
+      "instruction": "Classify the verbs according to the pronunciation of -ED: /t/, /d/ or /ɪd/.",
+      "instructionFr": "Choisis la prononciation de -ED. La règle dépend du dernier son du verbe, pas de sa dernière lettre.",
+      "example": "helped → /t/ : HELP se termine par le son sourd /p/.",
+      "items": [
+        {
+          "id": "q1",
+          "prompt": "worked",
+          "answers": [
+            "/t/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "WORK se termine par /k/. Le dernier son est sourd (autre que /t/) : -ED se prononce /t/."
+        },
+        {
+          "id": "q2",
+          "prompt": "played",
+          "answers": [
+            "/d/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "PLAY se termine par une voyelle. Le dernier son est voisé (autre que /d/) : -ED se prononce /d/."
+        },
+        {
+          "id": "q3",
+          "prompt": "wanted",
+          "answers": [
+            "/ɪd/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "WANT se termine par /t/. Le verbe se termine par le son /t/ ou /d/ : -ED ajoute une syllabe /ɪd/."
+        },
+        {
+          "id": "q4",
+          "prompt": "cleaned",
+          "answers": [
+            "/d/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "CLEAN se termine par /n/. Le dernier son est voisé (autre que /d/) : -ED se prononce /d/."
+        },
+        {
+          "id": "q5",
+          "prompt": "watched",
+          "answers": [
+            "/t/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "WATCH se termine par /tʃ/. Le dernier son est sourd (autre que /t/) : -ED se prononce /t/."
+        },
+        {
+          "id": "q6",
+          "prompt": "started",
+          "answers": [
+            "/ɪd/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "START se termine par /t/. Le verbe se termine par le son /t/ ou /d/ : -ED ajoute une syllabe /ɪd/."
+        },
+        {
+          "id": "q7",
+          "prompt": "looked",
+          "answers": [
+            "/t/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "LOOK se termine par /k/. Le dernier son est sourd (autre que /t/) : -ED se prononce /t/."
+        },
+        {
+          "id": "q8",
+          "prompt": "learned",
+          "answers": [
+            "/d/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "LEARN se termine par /n/. Le dernier son est voisé (autre que /d/) : -ED se prononce /d/. Ici, LEARNED est le verbe au prétérit."
+        },
+        {
+          "id": "q9",
+          "prompt": "washed",
+          "answers": [
+            "/t/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "WASH se termine par /ʃ/. Le dernier son est sourd (autre que /t/) : -ED se prononce /t/."
+        },
+        {
+          "id": "q10",
+          "prompt": "prepared",
+          "answers": [
+            "/d/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "PREPARE se termine par une voyelle (ou /r/ selon l’accent). Le dernier son est voisé (autre que /d/) : -ED se prononce /d/."
+        },
+        {
+          "id": "q11",
+          "prompt": "needed",
+          "answers": [
+            "/ɪd/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "NEED se termine par /d/. Le verbe se termine par le son /t/ ou /d/ : -ED ajoute une syllabe /ɪd/."
+        },
+        {
+          "id": "q12",
+          "prompt": "asked",
+          "answers": [
+            "/t/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "ASK se termine par /k/. Le dernier son est sourd (autre que /t/) : -ED se prononce /t/."
+        },
+        {
+          "id": "q13",
+          "prompt": "organised",
+          "answers": [
+            "/d/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "ORGANISE se termine par /z/. Le dernier son est voisé (autre que /d/) : -ED se prononce /d/."
+        },
+        {
+          "id": "q14",
+          "prompt": "visited",
+          "answers": [
+            "/ɪd/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "VISIT se termine par /t/. Le verbe se termine par le son /t/ ou /d/ : -ED ajoute une syllabe /ɪd/."
+        },
+        {
+          "id": "q15",
+          "prompt": "finished",
+          "answers": [
+            "/t/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "FINISH se termine par /ʃ/. Le dernier son est sourd (autre que /t/) : -ED se prononce /t/."
+        },
+        {
+          "id": "q16",
+          "prompt": "carried",
+          "answers": [
+            "/d/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "CARRY se termine par une voyelle. Le dernier son est voisé (autre que /d/) : -ED se prononce /d/."
+        },
+        {
+          "id": "q17",
+          "prompt": "decided",
+          "answers": [
+            "/ɪd/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "DECIDE se termine par /d/. Le verbe se termine par le son /t/ ou /d/ : -ED ajoute une syllabe /ɪd/."
+        },
+        {
+          "id": "q18",
+          "prompt": "walked",
+          "answers": [
+            "/t/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "WALK se termine par /k/. Le dernier son est sourd (autre que /t/) : -ED se prononce /t/."
+        },
+        {
+          "id": "q19",
+          "prompt": "enjoyed",
+          "answers": [
+            "/d/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "ENJOY se termine par une voyelle. Le dernier son est voisé (autre que /d/) : -ED se prononce /d/."
+        },
+        {
+          "id": "q20",
+          "prompt": "waited",
+          "answers": [
+            "/ɪd/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "WAIT se termine par /t/. Le verbe se termine par le son /t/ ou /d/ : -ED ajoute une syllabe /ɪd/."
+        },
+        {
+          "id": "q21",
+          "prompt": "checked",
+          "answers": [
+            "/t/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "CHECK se termine par /k/. Le dernier son est sourd (autre que /t/) : -ED se prononce /t/."
+        },
+        {
+          "id": "q22",
+          "prompt": "welcomed",
+          "answers": [
+            "/d/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "WELCOME se termine par /m/. Le dernier son est voisé (autre que /d/) : -ED se prononce /d/."
+        },
+        {
+          "id": "q23",
+          "prompt": "painted",
+          "answers": [
+            "/ɪd/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "PAINT se termine par /t/. Le verbe se termine par le son /t/ ou /d/ : -ED ajoute une syllabe /ɪd/."
+        },
+        {
+          "id": "q24",
+          "prompt": "stopped",
+          "answers": [
+            "/t/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "STOP se termine par /p/. Le dernier son est sourd (autre que /t/) : -ED se prononce /t/."
+        },
+        {
+          "id": "q25",
+          "prompt": "discovered",
+          "answers": [
+            "/d/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "DISCOVER se termine par une voyelle (ou /r/ selon l’accent). Le dernier son est voisé (autre que /d/) : -ED se prononce /d/."
+        },
+        {
+          "id": "q26",
+          "prompt": "accepted",
+          "answers": [
+            "/ɪd/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "ACCEPT se termine par /t/. Le verbe se termine par le son /t/ ou /d/ : -ED ajoute une syllabe /ɪd/."
+        },
+        {
+          "id": "q27",
+          "prompt": "helped",
+          "answers": [
+            "/t/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "HELP se termine par /p/. Le dernier son est sourd (autre que /t/) : -ED se prononce /t/."
+        },
+        {
+          "id": "q28",
+          "prompt": "realised",
+          "answers": [
+            "/d/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "REALISE se termine par /z/. Le dernier son est voisé (autre que /d/) : -ED se prononce /d/."
+        },
+        {
+          "id": "q29",
+          "prompt": "ended",
+          "answers": [
+            "/ɪd/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "END se termine par /d/. Le verbe se termine par le son /t/ ou /d/ : -ED ajoute une syllabe /ɪd/."
+        },
+        {
+          "id": "q30",
+          "prompt": "counted",
+          "answers": [
+            "/ɪd/"
+          ],
+          "choices": [
+            "/t/",
+            "/d/",
+            "/ɪd/"
+          ],
+          "explanation": "COUNT se termine par /t/. Le verbe se termine par le son /t/ ou /d/ : -ED ajoute une syllabe /ɪd/."
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "type": "text",
+      "mode": "pastNotes",
+      "count": 10,
+      "title": "Exercise 2 — The preterite: talking about a first job",
+      "instruction": "Use the notes to write complete sentences in the preterite.",
+      "instructionFr": "Reprends le sujet, conjugue les trois verbes au prétérit et conserve les compléments.",
+      "example": "Lucas / serve ice cream + take orders + help customers → Lucas served ice cream, took orders and helped customers.",
+      "items": [
+        {
+          "id": "q1",
+          "prompt": "Emma / look after children + prepare meals + play games",
+          "answers": [
+            "Emma looked after children, prepared meals and played games."
+          ],
+          "person": "Emma",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "look",
+              "past": "looked",
+              "basePhrase": "look after children",
+              "pastPhrase": "looked after children"
+            },
+            {
+              "base": "prepare",
+              "past": "prepared",
+              "basePhrase": "prepare meals",
+              "pastPhrase": "prepared meals"
+            },
+            {
+              "base": "play",
+              "past": "played",
+              "basePhrase": "play games",
+              "pastPhrase": "played games"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "Jake / stock shelves + help customers + carry boxes",
+          "answers": [
+            "Jake stocked shelves, helped customers and carried boxes."
+          ],
+          "person": "Jake",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "stock",
+              "past": "stocked",
+              "basePhrase": "stock shelves",
+              "pastPhrase": "stocked shelves"
+            },
+            {
+              "base": "help",
+              "past": "helped",
+              "basePhrase": "help customers",
+              "pastPhrase": "helped customers"
+            },
+            {
+              "base": "carry",
+              "past": "carried",
+              "basePhrase": "carry boxes",
+              "pastPhrase": "carried boxes"
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "Sophia / take orders + serve food + clean tables",
+          "answers": [
+            "Sophia took orders, served food and cleaned tables."
+          ],
+          "person": "Sophia",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "take",
+              "past": "took",
+              "basePhrase": "take orders",
+              "pastPhrase": "took orders"
+            },
+            {
+              "base": "serve",
+              "past": "served",
+              "basePhrase": "serve food",
+              "pastPhrase": "served food"
+            },
+            {
+              "base": "clean",
+              "past": "cleaned",
+              "basePhrase": "clean tables",
+              "pastPhrase": "cleaned tables"
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "Noah / welcome visitors + check tickets + give information",
+          "answers": [
+            "Noah welcomed visitors, checked tickets and gave information."
+          ],
+          "person": "Noah",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "welcome",
+              "past": "welcomed",
+              "basePhrase": "welcome visitors",
+              "pastPhrase": "welcomed visitors"
+            },
+            {
+              "base": "check",
+              "past": "checked",
+              "basePhrase": "check tickets",
+              "pastPhrase": "checked tickets"
+            },
+            {
+              "base": "give",
+              "past": "gave",
+              "basePhrase": "give information",
+              "pastPhrase": "gave information"
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "Ava / walk dogs + feed pets + look after animals",
+          "answers": [
+            "Ava walked dogs, fed pets and looked after animals."
+          ],
+          "person": "Ava",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "walk",
+              "past": "walked",
+              "basePhrase": "walk dogs",
+              "pastPhrase": "walked dogs"
+            },
+            {
+              "base": "feed",
+              "past": "fed",
+              "basePhrase": "feed pets",
+              "pastPhrase": "fed pets"
+            },
+            {
+              "base": "look",
+              "past": "looked",
+              "basePhrase": "look after animals",
+              "pastPhrase": "looked after animals"
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "Lucas / organise activities + lead games + help children",
+          "answers": [
+            "Lucas organised activities, led games and helped children."
+          ],
+          "person": "Lucas",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "organise",
+              "past": "organised",
+              "basePhrase": "organise activities",
+              "pastPhrase": "organised activities"
+            },
+            {
+              "base": "lead",
+              "past": "led",
+              "basePhrase": "lead games",
+              "pastPhrase": "led games"
+            },
+            {
+              "base": "help",
+              "past": "helped",
+              "basePhrase": "help children",
+              "pastPhrase": "helped children"
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "Ben / serve ice cream + take orders + clean tables",
+          "answers": [
+            "Ben served ice cream, took orders and cleaned tables."
+          ],
+          "person": "Ben",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "serve",
+              "past": "served",
+              "basePhrase": "serve ice cream",
+              "pastPhrase": "served ice cream"
+            },
+            {
+              "base": "take",
+              "past": "took",
+              "basePhrase": "take orders",
+              "pastPhrase": "took orders"
+            },
+            {
+              "base": "clean",
+              "past": "cleaned",
+              "basePhrase": "clean tables",
+              "pastPhrase": "cleaned tables"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "Namiye / look after children + learn new skills + become more responsible",
+          "answers": [
+            "Namiye looked after children, learned new skills and became more responsible."
+          ],
+          "person": "Namiye",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "look",
+              "past": "looked",
+              "basePhrase": "look after children",
+              "pastPhrase": "looked after children"
+            },
+            {
+              "base": "learn",
+              "past": "learned",
+              "basePhrase": "learn new skills",
+              "pastPhrase": "learned new skills"
+            },
+            {
+              "base": "become",
+              "past": "became",
+              "basePhrase": "become more responsible",
+              "pastPhrase": "became more responsible"
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "prompt": "Jack / wash cars + clean windows + earn money",
+          "answers": [
+            "Jack washed cars, cleaned windows and earned money."
+          ],
+          "person": "Jack",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "wash",
+              "past": "washed",
+              "basePhrase": "wash cars",
+              "pastPhrase": "washed cars"
+            },
+            {
+              "base": "clean",
+              "past": "cleaned",
+              "basePhrase": "clean windows",
+              "pastPhrase": "cleaned windows"
+            },
+            {
+              "base": "earn",
+              "past": "earned",
+              "basePhrase": "earn money",
+              "pastPhrase": "earned money"
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "prompt": "Lucy / prepare food + serve customers + wash dishes",
+          "answers": [
+            "Lucy prepared food, served customers and washed dishes."
+          ],
+          "person": "Lucy",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "prepare",
+              "past": "prepared",
+              "basePhrase": "prepare food",
+              "pastPhrase": "prepared food"
+            },
+            {
+              "base": "serve",
+              "past": "served",
+              "basePhrase": "serve customers",
+              "pastPhrase": "served customers"
+            },
+            {
+              "base": "wash",
+              "past": "washed",
+              "basePhrase": "wash dishes",
+              "pastPhrase": "washed dishes"
+            }
+          ]
+        },
+        {
+          "id": "q11",
+          "prompt": "Tom / deliver newspapers + ride his bike + earn pocket money",
+          "answers": [
+            "Tom delivered newspapers, rode his bike and earned pocket money."
+          ],
+          "person": "Tom",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "deliver",
+              "past": "delivered",
+              "basePhrase": "deliver newspapers",
+              "pastPhrase": "delivered newspapers"
+            },
+            {
+              "base": "ride",
+              "past": "rode",
+              "basePhrase": "ride his bike",
+              "pastPhrase": "rode his bike"
+            },
+            {
+              "base": "earn",
+              "past": "earned",
+              "basePhrase": "earn pocket money",
+              "pastPhrase": "earned pocket money"
+            }
+          ]
+        },
+        {
+          "id": "q12",
+          "prompt": "Sarah / welcome customers + sell clothes + organise shelves",
+          "answers": [
+            "Sarah welcomed customers, sold clothes and organised shelves."
+          ],
+          "person": "Sarah",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "welcome",
+              "past": "welcomed",
+              "basePhrase": "welcome customers",
+              "pastPhrase": "welcomed customers"
+            },
+            {
+              "base": "sell",
+              "past": "sold",
+              "basePhrase": "sell clothes",
+              "pastPhrase": "sold clothes"
+            },
+            {
+              "base": "organise",
+              "past": "organised",
+              "basePhrase": "organise shelves",
+              "pastPhrase": "organised shelves"
+            }
+          ]
+        },
+        {
+          "id": "q13",
+          "prompt": "Emma / wake up early + prepare breakfast + help children",
+          "answers": [
+            "Emma woke up early, prepared breakfast and helped children."
+          ],
+          "person": "Emma",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "wake",
+              "past": "woke",
+              "basePhrase": "wake up early",
+              "pastPhrase": "woke up early"
+            },
+            {
+              "base": "prepare",
+              "past": "prepared",
+              "basePhrase": "prepare breakfast",
+              "pastPhrase": "prepared breakfast"
+            },
+            {
+              "base": "help",
+              "past": "helped",
+              "basePhrase": "help children",
+              "pastPhrase": "helped children"
+            }
+          ]
+        },
+        {
+          "id": "q14",
+          "prompt": "Jake / work in a shop + carry boxes + meet new people",
+          "answers": [
+            "Jake worked in a shop, carried boxes and met new people."
+          ],
+          "person": "Jake",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "work",
+              "past": "worked",
+              "basePhrase": "work in a shop",
+              "pastPhrase": "worked in a shop"
+            },
+            {
+              "base": "carry",
+              "past": "carried",
+              "basePhrase": "carry boxes",
+              "pastPhrase": "carried boxes"
+            },
+            {
+              "base": "meet",
+              "past": "met",
+              "basePhrase": "meet new people",
+              "pastPhrase": "met new people"
+            }
+          ]
+        },
+        {
+          "id": "q15",
+          "prompt": "Sophia / decorate a room + organise activities + play games",
+          "answers": [
+            "Sophia decorated a room, organised activities and played games."
+          ],
+          "person": "Sophia",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "decorate",
+              "past": "decorated",
+              "basePhrase": "decorate a room",
+              "pastPhrase": "decorated a room"
+            },
+            {
+              "base": "organise",
+              "past": "organised",
+              "basePhrase": "organise activities",
+              "pastPhrase": "organised activities"
+            },
+            {
+              "base": "play",
+              "past": "played",
+              "basePhrase": "play games",
+              "pastPhrase": "played games"
+            }
+          ]
+        },
+        {
+          "id": "q16",
+          "prompt": "Noah / sell tickets + welcome visitors + answer questions",
+          "answers": [
+            "Noah sold tickets, welcomed visitors and answered questions."
+          ],
+          "person": "Noah",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "sell",
+              "past": "sold",
+              "basePhrase": "sell tickets",
+              "pastPhrase": "sold tickets"
+            },
+            {
+              "base": "welcome",
+              "past": "welcomed",
+              "basePhrase": "welcome visitors",
+              "pastPhrase": "welcomed visitors"
+            },
+            {
+              "base": "answer",
+              "past": "answered",
+              "basePhrase": "answer questions",
+              "pastPhrase": "answered questions"
+            }
+          ]
+        },
+        {
+          "id": "q17",
+          "prompt": "Ava / feed animals + clean cages + walk dogs",
+          "answers": [
+            "Ava fed animals, cleaned cages and walked dogs."
+          ],
+          "person": "Ava",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "feed",
+              "past": "fed",
+              "basePhrase": "feed animals",
+              "pastPhrase": "fed animals"
+            },
+            {
+              "base": "clean",
+              "past": "cleaned",
+              "basePhrase": "clean cages",
+              "pastPhrase": "cleaned cages"
+            },
+            {
+              "base": "walk",
+              "past": "walked",
+              "basePhrase": "walk dogs",
+              "pastPhrase": "walked dogs"
+            }
+          ]
+        },
+        {
+          "id": "q18",
+          "prompt": "Lucas / teach children + lead activities + learn new skills",
+          "answers": [
+            "Lucas taught children, led activities and learned new skills."
+          ],
+          "person": "Lucas",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "teach",
+              "past": "taught",
+              "basePhrase": "teach children",
+              "pastPhrase": "taught children"
+            },
+            {
+              "base": "lead",
+              "past": "led",
+              "basePhrase": "lead activities",
+              "pastPhrase": "led activities"
+            },
+            {
+              "base": "learn",
+              "past": "learned",
+              "basePhrase": "learn new skills",
+              "pastPhrase": "learned new skills"
+            }
+          ]
+        },
+        {
+          "id": "q19",
+          "prompt": "Ben / make sandwiches + serve food + clean the kitchen",
+          "answers": [
+            "Ben made sandwiches, served food and cleaned the kitchen."
+          ],
+          "person": "Ben",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "make",
+              "past": "made",
+              "basePhrase": "make sandwiches",
+              "pastPhrase": "made sandwiches"
+            },
+            {
+              "base": "serve",
+              "past": "served",
+              "basePhrase": "serve food",
+              "pastPhrase": "served food"
+            },
+            {
+              "base": "clean",
+              "past": "cleaned",
+              "basePhrase": "clean the kitchen",
+              "pastPhrase": "cleaned the kitchen"
+            }
+          ]
+        },
+        {
+          "id": "q20",
+          "prompt": "Namiye / start a new job + meet new people + become more confident",
+          "answers": [
+            "Namiye started a new job, met new people and became more confident."
+          ],
+          "person": "Namiye",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "start",
+              "past": "started",
+              "basePhrase": "start a new job",
+              "pastPhrase": "started a new job"
+            },
+            {
+              "base": "meet",
+              "past": "met",
+              "basePhrase": "meet new people",
+              "pastPhrase": "met new people"
+            },
+            {
+              "base": "become",
+              "past": "became",
+              "basePhrase": "become more confident",
+              "pastPhrase": "became more confident"
+            }
+          ]
+        },
+        {
+          "id": "q21",
+          "prompt": "Tom / mow lawns + water plants + help neighbours",
+          "answers": [
+            "Tom mowed lawns, watered plants and helped neighbours."
+          ],
+          "person": "Tom",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "mow",
+              "past": "mowed",
+              "basePhrase": "mow lawns",
+              "pastPhrase": "mowed lawns"
+            },
+            {
+              "base": "water",
+              "past": "watered",
+              "basePhrase": "water plants",
+              "pastPhrase": "watered plants"
+            },
+            {
+              "base": "help",
+              "past": "helped",
+              "basePhrase": "help neighbours",
+              "pastPhrase": "helped neighbours"
+            }
+          ]
+        },
+        {
+          "id": "q22",
+          "prompt": "Lucy / look after pets + feed cats + walk dogs",
+          "answers": [
+            "Lucy looked after pets, fed cats and walked dogs."
+          ],
+          "person": "Lucy",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "look",
+              "past": "looked",
+              "basePhrase": "look after pets",
+              "pastPhrase": "looked after pets"
+            },
+            {
+              "base": "feed",
+              "past": "fed",
+              "basePhrase": "feed cats",
+              "pastPhrase": "fed cats"
+            },
+            {
+              "base": "walk",
+              "past": "walked",
+              "basePhrase": "walk dogs",
+              "pastPhrase": "walked dogs"
+            }
+          ]
+        },
+        {
+          "id": "q23",
+          "prompt": "Jack / take orders + bring drinks + serve meals",
+          "answers": [
+            "Jack took orders, brought drinks and served meals."
+          ],
+          "person": "Jack",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "take",
+              "past": "took",
+              "basePhrase": "take orders",
+              "pastPhrase": "took orders"
+            },
+            {
+              "base": "bring",
+              "past": "brought",
+              "basePhrase": "bring drinks",
+              "pastPhrase": "brought drinks"
+            },
+            {
+              "base": "serve",
+              "past": "served",
+              "basePhrase": "serve meals",
+              "pastPhrase": "served meals"
+            }
+          ]
+        },
+        {
+          "id": "q24",
+          "prompt": "Sarah / work in a restaurant + meet customers + learn new skills",
+          "answers": [
+            "Sarah worked in a restaurant, met customers and learned new skills."
+          ],
+          "person": "Sarah",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "work",
+              "past": "worked",
+              "basePhrase": "work in a restaurant",
+              "pastPhrase": "worked in a restaurant"
+            },
+            {
+              "base": "meet",
+              "past": "met",
+              "basePhrase": "meet customers",
+              "pastPhrase": "met customers"
+            },
+            {
+              "base": "learn",
+              "past": "learned",
+              "basePhrase": "learn new skills",
+              "pastPhrase": "learned new skills"
+            }
+          ]
+        },
+        {
+          "id": "q25",
+          "prompt": "Emma / read stories + play games + prepare snacks",
+          "answers": [
+            "Emma read stories, played games and prepared snacks."
+          ],
+          "person": "Emma",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "read",
+              "past": "read",
+              "basePhrase": "read stories",
+              "pastPhrase": "read stories"
+            },
+            {
+              "base": "play",
+              "past": "played",
+              "basePhrase": "play games",
+              "pastPhrase": "played games"
+            },
+            {
+              "base": "prepare",
+              "past": "prepared",
+              "basePhrase": "prepare snacks",
+              "pastPhrase": "prepared snacks"
+            }
+          ]
+        },
+        {
+          "id": "q26",
+          "prompt": "Jake / open the shop + stock shelves + sell products",
+          "answers": [
+            "Jake opened the shop, stocked shelves and sold products."
+          ],
+          "person": "Jake",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "open",
+              "past": "opened",
+              "basePhrase": "open the shop",
+              "pastPhrase": "opened the shop"
+            },
+            {
+              "base": "stock",
+              "past": "stocked",
+              "basePhrase": "stock shelves",
+              "pastPhrase": "stocked shelves"
+            },
+            {
+              "base": "sell",
+              "past": "sold",
+              "basePhrase": "sell products",
+              "pastPhrase": "sold products"
+            }
+          ]
+        },
+        {
+          "id": "q27",
+          "prompt": "Sophia / help elderly people + do their shopping + carry bags",
+          "answers": [
+            "Sophia helped elderly people, did their shopping and carried bags."
+          ],
+          "person": "Sophia",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "help",
+              "past": "helped",
+              "basePhrase": "help elderly people",
+              "pastPhrase": "helped elderly people"
+            },
+            {
+              "base": "do",
+              "past": "did",
+              "basePhrase": "do their shopping",
+              "pastPhrase": "did their shopping"
+            },
+            {
+              "base": "carry",
+              "past": "carried",
+              "basePhrase": "carry bags",
+              "pastPhrase": "carried bags"
+            }
+          ]
+        },
+        {
+          "id": "q28",
+          "prompt": "Noah / find a summer job + work hard + save money",
+          "answers": [
+            "Noah found a summer job, worked hard and saved money."
+          ],
+          "person": "Noah",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "find",
+              "past": "found",
+              "basePhrase": "find a summer job",
+              "pastPhrase": "found a summer job"
+            },
+            {
+              "base": "work",
+              "past": "worked",
+              "basePhrase": "work hard",
+              "pastPhrase": "worked hard"
+            },
+            {
+              "base": "save",
+              "past": "saved",
+              "basePhrase": "save money",
+              "pastPhrase": "saved money"
+            }
+          ]
+        },
+        {
+          "id": "q29",
+          "prompt": "Ava / start work early + finish late + feel tired",
+          "answers": [
+            "Ava started work early, finished late and felt tired."
+          ],
+          "person": "Ava",
+          "pronoun": "she",
+          "actions": [
+            {
+              "base": "start",
+              "past": "started",
+              "basePhrase": "start work early",
+              "pastPhrase": "started work early"
+            },
+            {
+              "base": "finish",
+              "past": "finished",
+              "basePhrase": "finish late",
+              "pastPhrase": "finished late"
+            },
+            {
+              "base": "feel",
+              "past": "felt",
+              "basePhrase": "feel tired",
+              "pastPhrase": "felt tired"
+            }
+          ]
+        },
+        {
+          "id": "q30",
+          "prompt": "Ben / take on new responsibilities + learn new skills + become more independent",
+          "answers": [
+            "Ben took on new responsibilities, learned new skills and became more independent."
+          ],
+          "person": "Ben",
+          "pronoun": "he",
+          "actions": [
+            {
+              "base": "take",
+              "past": "took",
+              "basePhrase": "take on new responsibilities",
+              "pastPhrase": "took on new responsibilities"
+            },
+            {
+              "base": "learn",
+              "past": "learned",
+              "basePhrase": "learn new skills",
+              "pastPhrase": "learned new skills"
+            },
+            {
+              "base": "become",
+              "past": "became",
+              "basePhrase": "become more independent",
+              "pastPhrase": "became more independent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "type": "text",
+      "mode": "jobTranslation",
+      "count": 10,
+      "title": "Exercise 3 — Translation",
+      "instruction": "Translate the following sentences into English.",
+      "instructionFr": "Traduis les phrases en anglais. Travaille le prétérit et conserve le sens de la phrase.",
+      "example": "Avant, Emma passait des heures sur son téléphone. → Before, Emma spent hours on her phone.",
+      "items": [
+        {
+          "id": "q1",
+          "prompt": "Avant, Emma regardait souvent la télévision.",
+          "answers": [
+            "Before, Emma often watched TV."
+          ]
+        },
+        {
+          "id": "q2",
+          "prompt": "Avant, Jake n'aidait pas ses parents à la maison.",
+          "answers": [
+            "Before, Jake didn't help his parents at home."
+          ]
+        },
+        {
+          "id": "q3",
+          "prompt": "Avant, Sophia évitait de parler aux inconnus.",
+          "answers": [
+            "Before, Sophia avoided talking to strangers."
+          ]
+        },
+        {
+          "id": "q4",
+          "prompt": "Avant, Ben ne parlait pas beaucoup aux autres.",
+          "answers": [
+            "Before, Ben didn't talk much to other people."
+          ]
+        },
+        {
+          "id": "q5",
+          "prompt": "Emma a découvert qu'elle aimait garder des enfants.",
+          "answers": [
+            "Emma discovered that she liked looking after children."
+          ]
+        },
+        {
+          "id": "q6",
+          "prompt": "Jake a appris que travailler était fatigant.",
+          "answers": [
+            "Jake learned that working was tiring."
+          ]
+        },
+        {
+          "id": "q7",
+          "prompt": "Sophia s'est rendu compte qu'elle était plus sociable.",
+          "answers": [
+            "Sophia realised that she was more sociable."
+          ]
+        },
+        {
+          "id": "q8",
+          "prompt": "Ben a découvert qu'il aimait aider les clients.",
+          "answers": [
+            "Ben discovered that he liked helping customers."
+          ]
+        },
+        {
+          "id": "q9",
+          "prompt": "Avant, Lucas passait des heures à jouer aux jeux vidéo.",
+          "answers": [
+            "Before, Lucas spent hours playing video games."
+          ]
+        },
+        {
+          "id": "q10",
+          "prompt": "Avant, Ava ne travaillait pas pendant les vacances.",
+          "answers": [
+            "Before, Ava didn't work during the holidays."
+          ]
+        },
+        {
+          "id": "q11",
+          "prompt": "Avant, Noah évitait de parler aux autres.",
+          "answers": [
+            "Before, Noah avoided talking to other people."
+          ]
+        },
+        {
+          "id": "q12",
+          "prompt": "Avant, Lucy regardait souvent des vidéos sur son téléphone.",
+          "answers": [
+            "Before, Lucy often watched videos on her phone."
+          ]
+        },
+        {
+          "id": "q13",
+          "prompt": "Avant, Tom ne faisait pas les courses.",
+          "answers": [
+            "Before, Tom didn't do the shopping."
+          ]
+        },
+        {
+          "id": "q14",
+          "prompt": "Avant, Sarah ne gagnait pas d'argent.",
+          "answers": [
+            "Before, Sarah didn't earn any money."
+          ]
+        },
+        {
+          "id": "q15",
+          "prompt": "Avant, Jack jouait souvent aux jeux vidéo.",
+          "answers": [
+            "Before, Jack often played video games."
+          ]
+        },
+        {
+          "id": "q16",
+          "prompt": "Avant, Namiye ne parlait pas beaucoup aux inconnus.",
+          "answers": [
+            "Before, Namiye didn't talk much to strangers."
+          ]
+        },
+        {
+          "id": "q17",
+          "prompt": "Avant, Emma ne préparait pas les repas.",
+          "answers": [
+            "Before, Emma didn't prepare meals."
+          ]
+        },
+        {
+          "id": "q18",
+          "prompt": "Avant, Ben ne se levait pas tôt.",
+          "answers": [
+            "Before, Ben didn't get up early."
+          ]
+        },
+        {
+          "id": "q19",
+          "prompt": "Lucas a découvert qu'il aimait travailler avec les enfants.",
+          "answers": [
+            "Lucas discovered that he liked working with children."
+          ]
+        },
+        {
+          "id": "q20",
+          "prompt": "Ava a découvert qu'elle aimait s'occuper des animaux.",
+          "answers": [
+            "Ava discovered that she liked looking after animals."
+          ]
+        },
+        {
+          "id": "q21",
+          "prompt": "Noah a appris que travailler était difficile.",
+          "answers": [
+            "Noah learned that working was difficult."
+          ]
+        },
+        {
+          "id": "q22",
+          "prompt": "Lucy s'est rendu compte qu'elle était plus indépendante.",
+          "answers": [
+            "Lucy realised that she was more independent."
+          ]
+        },
+        {
+          "id": "q23",
+          "prompt": "Tom a découvert qu'il aimait aider ses voisins.",
+          "answers": [
+            "Tom discovered that he liked helping his neighbours."
+          ]
+        },
+        {
+          "id": "q24",
+          "prompt": "Sarah a appris que travailler dans un restaurant était fatigant.",
+          "answers": [
+            "Sarah learned that working in a restaurant was tiring."
+          ]
+        },
+        {
+          "id": "q25",
+          "prompt": "Jack s'est rendu compte qu'il était plus responsable.",
+          "answers": [
+            "Jack realised that he was more responsible."
+          ]
+        },
+        {
+          "id": "q26",
+          "prompt": "Namiye a découvert qu'elle aimait organiser des activités.",
+          "answers": [
+            "Namiye discovered that she liked organising activities."
+          ]
+        },
+        {
+          "id": "q27",
+          "prompt": "Emma s'est rendu compte qu'elle était plus sûre d'elle.",
+          "answers": [
+            "Emma realised that she was more confident."
+          ]
+        },
+        {
+          "id": "q28",
+          "prompt": "Jake a découvert qu'il aimait travailler dans un magasin.",
+          "answers": [
+            "Jake discovered that he liked working in a shop."
+          ]
+        },
+        {
+          "id": "q29",
+          "prompt": "Sophia a appris que travailler avec des enfants était difficile.",
+          "answers": [
+            "Sophia learned that working with children was difficult."
+          ]
+        },
+        {
+          "id": "q30",
+          "prompt": "Ben s'est rendu compte qu'il était plus indépendant.",
+          "answers": [
+            "Ben realised that he was more independent."
+          ]
+        }
+      ]
+    }
+  ]
+});

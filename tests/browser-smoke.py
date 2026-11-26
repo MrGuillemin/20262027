@@ -64,6 +64,7 @@ with sync_playwright() as p:
             page.add_style_tag(content=css)
             if entry:
                 page.evaluate(app)
+                if entry.get('engineRuntime'):page.evaluate((ROOT/entry['path']/entry['engineRuntime']).read_text())
                 if entry.get('engineScript'):page.evaluate((ROOT/entry['path']/entry['engineScript']).read_text())
                 page.evaluate((ROOT/entry['path']/entry['script']).read_text())
         for width in [1440,390]:
@@ -76,7 +77,7 @@ with sync_playwright() as p:
                 assert page.locator('.exercise-error').count()==0
                 assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth+1'),entry['path']+' overflows'
                 total+=count
-            assert total==58
+            assert total==70
             display('index.html')
             assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth+1')
             suffix='desktop' if width==1440 else 'mobile'
@@ -89,7 +90,7 @@ with sync_playwright() as p:
             assert page.locator('.fallback-exercise').count()==len(config(entry)['exercises'])
         assert not errors,errors
         browser.close()
-        print('PASS render-only: 58 exercises at desktop and mobile widths; 18 readable fallbacks. Navigation not tested in this mode.')
+        print('PASS render-only: 70 exercises at desktop and mobile widths; 22 readable fallbacks. Navigation not tested in this mode.')
         raise SystemExit(0)
     total=0
     for entry in manifest:
@@ -103,7 +104,7 @@ with sync_playwright() as p:
         assert page.locator('.question input, .question select, .question textarea').count()>0
         total+=expected
         print(entry['path']+': '+str(expected)+' exercises visible',flush=True)
-    assert total==58,total
+    assert total==70,total
 
     # Go through each class and unit instead of only opening deep links.
     for code in ['5E4','4E2','4E3','3E2','3E4']:
@@ -139,7 +140,7 @@ with sync_playwright() as p:
         page.goto(ORIGIN,wait_until='networkidle')
         page.locator('.class-card[href="'+entry['className']+'/"]').click()
         page.locator('.unit-card[href="'+entry['unit']+'/"]').click()
-        page.locator('.lesson-card').click()
+        page.locator('.lesson-card[href="'+entry['path'].split('/')[-1]+'/"]').click()
         page.wait_for_selector('#ex1 select')
         bank={q['id']:q for q in config(entry)['exercises'][0]['items']}
         orders=set();seen=set();choice_orders=set()
@@ -180,7 +181,7 @@ with sync_playwright() as p:
     page.goto(ORIGIN,wait_until='networkidle')
     page.locator('.class-card[href="5E4/"]').click()
     page.locator('.unit-card[href="unit2/"]').click()
-    page.locator('.lesson-card').click()
+    page.locator('.lesson-card[href="'+time_entry['path'].split('/')[-1]+'/"]').click()
     page.wait_for_selector('#ex1 input')
     for width in [1440,390]:
         page.set_viewport_size({'width':width,'height':1000 if width==1440 else 844})
@@ -225,7 +226,7 @@ with sync_playwright() as p:
     page.goto(ORIGIN,wait_until='networkidle')
     page.locator('.class-card[href="3E2/"]').click()
     page.locator('.unit-card[href="unit2/"]').click()
-    page.locator('.lesson-card').click()
+    page.locator('.lesson-card[href="'+money_entry['path'].split('/')[-1]+'/"]').click()
     page.wait_for_selector('#ex1 input')
     for width in [1440,768,390]:
         page.set_viewport_size({'width':width,'height':1000 if width==1440 else 844})
@@ -296,4 +297,4 @@ with sync_playwright() as p:
     assert not errors,errors
     browser.close()
 server.shutdown()
-print('PASS: 18 lessons, 58 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)
+print('PASS: 22 lessons, 70 exercises, five navigation journeys, saved responses, scoped retries, mobile and script-free reading.',flush=True)

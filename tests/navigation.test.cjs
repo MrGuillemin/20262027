@@ -5,8 +5,8 @@ const path=require('node:path');
 const vm=require('node:vm');
 const {root,manifest,loadLesson,walk}=require('./helpers.cjs');
 const html=walk(root).filter(file=>file.endsWith('.html'));
-test('all thirty-four pages and their links resolve under both the production and a preview prefix',()=>{
-  assert.equal(html.length,34);
+test('all thirty-eight pages and their links resolve under both the production and a preview prefix',()=>{
+  assert.equal(html.length,38);
   for(const prefix of ['/20262027/','/preview/'])for(const file of html){const relative=path.relative(root,file).split(path.sep).join('/'),source=fs.readFileSync(file,'utf8');
     for(const match of source.matchAll(/(?:href|src)=["']([^"']+)["']/g)){
       const reference=match[1];assert.ok(!reference.startsWith('/'),relative+' hardcoded root URL');

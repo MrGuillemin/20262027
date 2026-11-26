@@ -184,5 +184,61 @@
     "bank": "questions.json",
     "unitTitle": "Making Pocket Money",
     "notice": "TO + BV : but · BY + V-ING : moyen · WANT TO + BV : volonté. Les réponses restent dans la page jusqu’au recommencement. Elles ne sont pas sauvegardées après rechargement."
+  },
+  {
+    "className": "4E2",
+    "unit": "unit2",
+    "letter": "c",
+    "path": "4E2/unit2/lesson-c",
+    "title": "Lesson C",
+    "description": "Footy fans, habits and emotions",
+    "script": "lesson.js",
+    "engine": "FootyPractice",
+    "engineRuntime": "../../../assets/js/lesson-practice.js",
+    "engineScript": "../../../assets/js/footy-practice.js",
+    "bank": "questions.json",
+    "notice": "10 questions parmi 30 à chaque tentative. Try again recommence uniquement l’exercice concerné. Les formulations non reconnues restent à comparer. Après trois essais non vides non validés, Show answer propose un modèle."
+  },
+  {
+    "className": "4E3",
+    "unit": "Unit2",
+    "letter": "c",
+    "path": "4E3/Unit2/LessonC",
+    "title": "Lesson C",
+    "description": "Footy fans, habits and emotions",
+    "script": "lesson.js",
+    "engine": "FootyPractice",
+    "engineRuntime": "../../../assets/js/lesson-practice.js",
+    "engineScript": "../../../assets/js/footy-practice.js",
+    "bank": "questions.json",
+    "notice": "10 questions parmi 30 à chaque tentative. Try again recommence uniquement l’exercice concerné. Les formulations non reconnues restent à comparer. Après trois essais non vides non validés, Show answer propose un modèle."
+  },
+  {
+    "className": "3E2",
+    "unit": "unit2",
+    "letter": "b",
+    "path": "3E2/unit2/lessonB",
+    "title": "Lesson B",
+    "description": "My First Job",
+    "script": "lesson.js",
+    "engine": "FirstJobPractice",
+    "engineRuntime": "../../../assets/js/lesson-practice.js",
+    "engineScript": "../../../assets/js/first-job-practice.js",
+    "bank": "questions.json",
+    "notice": "10 questions parmi 30 à chaque tentative. Try again recommence uniquement l’exercice concerné. Les formulations non reconnues restent à comparer. Le modèle devient disponible après une réponse tentée."
+  },
+  {
+    "className": "3E4",
+    "unit": "unit2",
+    "letter": "b",
+    "path": "3E4/unit2/lessonB",
+    "title": "Lesson B",
+    "description": "My First Job",
+    "script": "lesson.js",
+    "engine": "FirstJobPractice",
+    "engineRuntime": "../../../assets/js/lesson-practice.js",
+    "engineScript": "../../../assets/js/first-job-practice.js",
+    "bank": "questions.json",
+    "notice": "10 questions parmi 30 à chaque tentative. Try again recommence uniquement l’exercice concerné. Les formulations non reconnues restent à comparer. Le modèle devient disponible après une réponse tentée."
   }
 ]
