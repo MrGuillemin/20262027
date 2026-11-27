@@ -19,7 +19,7 @@ with sync_playwright() as p:
     errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto(base+'/3E4/')
     page.locator('a.unit-card[href="unit2/"]').click()
-    page.locator('a.lesson-card').click()
+    page.locator('a.lesson-card[href="lessonA/"]').click()
     page.wait_for_selector('#ex1 input')
     assert page.locator('.exercise').count()==2
     for index,ex in enumerate(bank):
